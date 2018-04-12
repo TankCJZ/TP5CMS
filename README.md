@@ -17,6 +17,7 @@ TP5CMS，一个基于ThinkPHP5.1版本开发内容管理系统,扁平化自适�
 ### 使用须知
 
 > 运行环境要求PHP5.6+
+> 需要在application 目录下添加database.php数据配置文件，并导入数据库
 
 ### 演示地址
 
@@ -27,3 +28,9 @@ TP5CMS，一个基于ThinkPHP5.1版本开发内容管理系统,扁平化自适�
 ### 展示图
 
 ![](https://tp5cms-img.oss-cn-beijing.aliyuncs.com/TP5CMS.gif) 
+
+### 后续功能完善
+
+ + 安装模块
+ + 会员登陆
+ ...
