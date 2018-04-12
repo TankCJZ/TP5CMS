@@ -1,0 +1,108 @@
+{include file='public/header' title='网站首页-附件上传设置'}
+<body>
+    <!-- 头部 -->
+    {include file="public/header_min"}
+    <!-- /头部 -->
+    <div class="main-container container-fluid">
+        <div class="page-container">
+            <!-- Page Sidebar -->
+            {include file="public/slidebar"}
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="{url('Site/index')}">站点设置</a>
+                        </li>
+                        <li class="active">附件上传设置</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Header -->
+                <div class="page-header position-relative">
+                    <div class="header-title">
+                        <h1>
+                            附件上传设置
+                        </h1>
+                    </div>
+                    <!--Header Buttons-->
+                    <div class="header-buttons">
+                        <a class="sidebar-toggler" href="#">
+                            <i class="fa fa-arrows-h"></i>
+                        </a>
+                        <a class="refresh" id="refresh-toggler" href="">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        <a class="fullscreen active" id="fullscreen-toggler" href="#">
+                            <i class="glyphicon glyphicon-fullscreen"></i>
+                        </a>
+                    </div>
+                    <!--Header Buttons End-->
+                </div>
+                <!-- /Page Header -->
+                <!-- Page Body -->
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12">
+                            <div class="widget">
+                                <div class="widget-header ">
+                                    <span class="widget-caption">上传设置</span>
+                                </div>
+                                <div class="widget-body">
+                                    <form class="form-horizontal" role="form" id="set-upload-form">
+                                        <h5 class="row-title before-sky">上传图片文件</h5>
+                                        <div class="input-wrap">
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label no-padding-right">允许上传类型</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" name="image" value="{$Think.config.upload.image}" class="form-control">
+                                                </div>
+                                                <p class="help-block col-sm-4"><span class="label label-success">可添加多个','隔开</span></p>
+                                            </div>
+                                        </div>
+
+                                        <h5 class="row-title before-sky">上传附件文件</h5>
+                                        <div class="input-wrap">
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label no-padding-right">允许上传类型</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" name="file" value="{$Think.config.upload.file}" class="form-control">
+                                                </div>
+                                                <p class="help-block col-sm-4"><span class="label label-success">可添加多个','隔开</span></p>
+                                            </div>
+                                            
+                                        </div>
+                                        <h5 class="row-title before-sky">最大上传大小</h5>
+                                        <div class="input-wrap">
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label no-padding-right">单位(KB)</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" name="maxsize" value="{$Think.config.upload.maxsize}" class="form-control">
+                                                </div>
+                                                <p class="help-block col-sm-4"><span class="label label-success">单位kb</span></p>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <button type="submit" class="btn btn-success btn-setupload">设置</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <!-- /Page Body -->
+        </div>
+        <!-- /Page Content -->
+    </div>
+    </div>
+    {include file='public/footer'}
+    <script src="__PUBLIC__js/setup/upload.js"></script>
+</body>
+</html>

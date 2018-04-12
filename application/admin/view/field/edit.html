@@ -1,0 +1,130 @@
+{include file='public/header' title='网站首页-模型管理-字段列表'}
+
+<body>
+    <!-- 头部 -->
+    {include file="public/header_min"}
+    <!-- /头部 -->
+    <div class="main-container container-fluid">
+        <div class="page-container">
+            <!-- Page Sidebar -->
+            {include file="public/slidebar"}
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="{url('Field/index')}">字段管理</a>
+                        </li>
+                        <li class="active">修改字段</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Header -->
+                <div class="page-header position-relative">
+                    <div class="header-title">
+                        <h1>
+                            修改字段
+                        </h1>
+                    </div>
+                    <!--Header Buttons-->
+                    <div class="header-buttons">
+                        <a class="sidebar-toggler" href="#">
+                            <i class="fa fa-arrows-h"></i>
+                        </a>
+                        <a class="refresh" id="refresh-toggler" href="">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        <a class="fullscreen active" id="fullscreen-toggler" href="#">
+                            <i class="glyphicon glyphicon-fullscreen"></i>
+                        </a>
+                    </div>
+                    <!--Header Buttons End-->
+                </div>
+                <!-- /Page Header -->
+                <!-- Page Body -->
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <div class="widget">
+                                <div class="widget-header bordered-bottom bordered-green">
+                                    <span class="widget-caption">修改字段</span>
+                                </div>
+                                <div class="widget-body">
+                                    <div>
+                                        <form class="form-horizontal" action="/admin/field/edit" id="field-edit-form" method="post">
+                                            <div class="form-group">
+                                                <label for="datatype" class="col-sm-1 control-label no-padding-right">字段类型</label>
+                                                <div class="col-sm-4">
+                                                    <select style="width: 100%;" disabled="disabled" >
+                                                        <option value="string" {$field['datatype']=='string'?'selected="selected"':''}>单行文本</option>
+                                                        <option value="lengthstring" {$field['datatype']=='lengthstring'?'selected="selected"':''}>多行文本</option>
+                                                        <option value="int" {$field['datatype']=='int'?'selected="selected"':''}>数字</option>
+                                                        <option value="editor" {$field['datatype']=='editor'?'selected="selected"':''}>编辑框</option>
+                                                        <option value="image" {$field['datatype']=='image'?'selected="selected"':''}>单图片</option>
+                                                        <option value="images" {$field['datatype']=='images'?'selected="selected"':''}>多图片</option>
+                                                        <option value="file" {$field['datatype']=='file'?'selected="selected"':''}>单文件</option>
+                                                        <option value="files" {$field['datatype']=='files'?'selected="selected"':''}>多文件</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="name" class="col-sm-1 control-label no-padding-right">字段名</label>
+                                                <div class="col-sm-4">
+                                                    <input id="name" disabled="disabled" class="form-control" placeholder="" value="{$field.name}" type="text">
+                                                </div>
+                                                <p class="help-block col-sm-4 red">* 不能修改</p>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="fieldname" class="col-sm-1 control-label no-padding-right">字段别名</label>
+                                                <div class="col-sm-4">
+                                                    <input id="fieldname" require class="form-control" placeholder="" name="fieldname" value="{$field.fieldname}" type="text">
+                                                </div>
+                                                <p class="help-block col-sm-4 red">* 必填（如：标题）</p>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="prom" class="col-sm-1 control-label no-padding-right">提示信息</label>
+                                                <div class="col-sm-4">
+                                                    <input id="prom" require class="form-control" placeholder="" name="prom" value="{$field.prom}" type="text">
+                                                </div>
+                                                <p class="help-block col-sm-4 red"></p>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="sort" class="col-sm-1 control-label no-padding-right">排序</label>
+                                                <div class="col-sm-4">
+                                                    <input id="sort" require class="form-control" placeholder="" name="sort" value="{$field.sort}" type="number">
+                                                </div>
+                                                <p class="help-block col-sm-4 red"></p>
+                                            </div>
+                                            <input type="hidden" id="fieldid" name="id" value="{$field.id}" >
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-1 col-sm-10">
+                                                    <button type="submit" class="btn btn-default field-edit">修改字段</button>
+                                                    <a href="javascript:window.history.go(-1);" class="btn btn-primary cate-add">返回字段管理</a>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Page Body -->
+        </div>
+        <!-- /Page Content -->
+    </div>
+    </div>
+    {include file='public/footer'}
+    <script src="__PUBLIC__js/common.js"></script>
+    <script src="__PUBLIC__js/model-field.js"></script>
+</body>
+</html>

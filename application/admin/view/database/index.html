@@ -1,0 +1,136 @@
+{include file='public/header' title='网站首页-数据库'}
+<link href="__PUBLIC__css/dataTables.bootstrap.css" rel="stylesheet">
+<style>
+    #adstables tbody>tr>td{
+        text-align: center;
+    }
+</style>
+<body>
+    <!-- 头部 -->
+    {include file="public/header_min"}
+    <!-- /头部 -->
+    <div class="main-container container-fluid">
+        <div class="page-container">
+            <!-- Page Sidebar -->
+            {include file="public/slidebar"}
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="{url('Database/index')}">数据库</a>
+                        </li>
+                        <li class="active">数据库表列表</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Header -->
+                <div class="page-header position-relative">
+                    <div class="header-title">
+                        <h1>
+                            数据库表列表
+                        </h1>
+                    </div>
+                    <!--Header Buttons-->
+                    <div class="header-buttons">
+                        <a class="sidebar-toggler" href="#">
+                            <i class="fa fa-arrows-h"></i>
+                        </a>
+                        <a class="refresh" id="refresh-toggler" href="">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        <a class="fullscreen active" id="fullscreen-toggler" href="#">
+                            <i class="glyphicon glyphicon-fullscreen"></i>
+                        </a>
+                    </div>
+                    <!--Header Buttons End-->
+                </div>
+                <!-- /Page Header -->
+                <!-- Page Body -->
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12">
+                            <div class="widget">
+                                <div class="widget-header ">
+                                    <span class="widget-caption">数据库</span>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="table-toolbar">
+                                        <div class="btn-group">
+                                            <a href="javascript:;" class="btn btn-default database-backup"><i class="fa fa-refresh"></i>备份表</a>
+                                            <a href="javascript:;" class="btn btn-default database-repair"><i class="fa fa-wrench"></i>修复表</a>
+                                            <a href="javascript:;" class="btn btn-default database-optimize"><i class="fa fa-briefcase"></i>优化表</a>
+                                            <a href="/admin/database/backup_list" class="btn btn-success database-files"><i class="fa fa-file"></i>数据库恢复</a>
+                                        </div>
+                                        <div class="btn-group pull-right">
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-hover table-bordered" id="adstables">
+                                            <thead>
+                                                <tr role="row">
+                                                    <th style="width: 17px;" rowspan="1" colspan="1">
+                                                    <label class="margin-b0">
+                                                            <input type="checkbox">
+                                                            <span class="text"></span>
+                                                        </label> 
+                                                    </th>
+                                                    <th class="col-xs-2 text-center">
+                                                        表名
+                                                    </th>
+                                                    <th class="col-xs-1 text-center">
+                                                        数据量
+                                                    </th>
+                                                    <th class="col-xs-2 text-center">
+                                                        数据大小
+                                                    </th>
+                                                    <th class="col-xs-2 text-center">
+                                                        创建时间
+                                                    </th>
+                                                    <th class=" text-center">
+                                                        说明
+                                                    </th>
+                                                    <th class="col-xs-1 text-center">
+                                                        状态
+                                                    </th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                    {volist name="_list" id="table"}
+                                        <tr>
+                                            <td style="width: 17px;" rowspan="1" colspan="1">
+                                            <label class="margin-b0">
+                                                    <input type="checkbox" value="{$table.name}">
+                                                    <span class="text"></span>
+                                                </label> 
+                                            </td>
+                                            <td>{$table.name}</td>
+                                            <td>{$table.rows}</td>
+                                            <td>{$table.data_length|format_bytes}</td>
+                                            <td>{$table.create_time}</td>
+                                            <td>{$table.comment}</td>
+                                            <td><span class="status label label-info">
+                                                未开始
+                                            </span></td>
+                                        </tr>
+                                    {/volist}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <!-- /Page Body -->
+        </div>
+    </div>
+    </div>
+    {include file='public/footer'}
+    <script src="__PUBLIC__js/database/init.js"></script>
+</body>
+</html>

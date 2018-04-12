@@ -1,0 +1,172 @@
+{include file='public/header' title='网站首页-验证码设置'}
+<body>
+    <!-- 头部 -->
+    {include file="public/header_min"}
+    <!-- /头部 -->
+    <div class="main-container container-fluid">
+        <div class="page-container">
+            <!-- Page Sidebar -->
+            {include file="public/slidebar"}
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="{url('Site/index')}">站点设置</a>
+                        </li>
+                        <li class="active">验证码设置</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Header -->
+                <div class="page-header position-relative">
+                    <div class="header-title">
+                        <h1>
+                            验证码设置
+                        </h1>
+                    </div>
+                    <!--Header Buttons-->
+                    <div class="header-buttons">
+                        <a class="sidebar-toggler" href="#">
+                            <i class="fa fa-arrows-h"></i>
+                        </a>
+                        <a class="refresh" id="refresh-toggler" href="">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        <a class="fullscreen active" id="fullscreen-toggler" href="#">
+                            <i class="glyphicon glyphicon-fullscreen"></i>
+                        </a>
+                    </div>
+                    <!--Header Buttons End-->
+                </div>
+                <!-- /Page Header -->
+                <!-- Page Body -->
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12">
+                            <div class="widget">
+                                <div class="widget-header ">
+                                    <span class="widget-caption">验证码设置</span>
+                                </div>
+                                <div class="widget-body">
+                                    <form class="form-horizontal" role="form" id="set-verify-form">
+                                        <h5 class="row-title before-sky">后台登录</h5>
+                                        <div class="input-wrap">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label no-padding-right">是否启用</label>
+                                                <div class="col-sm-8">
+                                                    <div class="radio inline-block">
+                                                        <label>
+                                                            <input name="on" type="radio" class="checked" value="true" {$Think.config.captcha.on==true?"checked":""}>
+                                                            <span class="text">启用</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio inline-block">
+                                                        <label>
+                                                            <input class="unchecked" name="on" type="radio" value="false" {$Think.config.captcha.on==false?"checked":""}>
+                                                            <span class="text">禁用</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label no-padding-right">使用中文验证码</label>
+                                                <div class="col-sm-8 usZh">
+                                                    <div class="radio inline-block">
+                                                        <label>
+                                                            <input name="useZh" type="radio" value="true" {$Think.config.captcha.useZh==true?"checked":""}>
+                                                            <span class="text">启用</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio inline-block">
+                                                        <label>
+                                                            <input name="useZh" type="radio" value="false" {$Think.config.captcha.useZh==false?"checked":""}>
+                                                            <span class="text">禁用</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label no-padding-right">字体大小(px)</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" name="fontSize" value="{$Think.config.captcha.fontSize}" class="form-control">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label no-padding-right">是否画混淆曲线</label>
+                                                <div class="col-sm-8">
+                                                    <div class="radio inline-block">
+                                                        <label>
+                                                            <input name="useCurve" type="radio" class="checked" value="true" {$Think.config.captcha.useCurve==true?"checked":""}>
+                                                            <span class="text">启用</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio inline-block">
+                                                        <label>
+                                                            <input class="unchecked" name="useCurve" type="radio" value="false" {$Think.config.captcha.useCurve==false?"checked":""}>
+                                                            <span class="text">禁用</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label no-padding-right">是否添加杂点</label>
+                                                <div class="col-sm-8">
+                                                    <div class="radio inline-block">
+                                                        <label>
+                                                            <input name="useNoise" type="radio" class="checked" value="true" {$Think.config.captcha.useNoise==true?"checked":""}>
+                                                            <span class="text">启用</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio inline-block">
+                                                        <label>
+                                                            <input class="unchecked" name="useNoise" type="radio" value="false" {$Think.config.captcha.useNoise==false?"checked":""}>
+                                                            <span class="text">禁用</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label no-padding-right">验证码字体</label>
+                                                <div class="col-sm-8">
+                                                    <select name="fontttf" style="width: 100%;" id="fontttf">
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label no-padding-right">背景颜色(RGB)</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" name="bg" value="{$Think.config.captcha.bg|implode=',',###}" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <button type="submit" class="btn btn-success btn-set-verify">保存设置</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <!-- /Page Body -->
+        </div>
+        <!-- /Page Content -->
+    </div>
+    </div>
+    {include file='public/footer'}
+    <script src="__PUBLIC__js/setup/verify.js"></script>
+</body>
+</html>

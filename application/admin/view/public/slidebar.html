@@ -1,0 +1,182 @@
+<div class="page-sidebar" id="sidebar">
+    <!-- Page Sidebar Header-->
+    <div class="sidebar-header-wrapper">
+        <input type="text" class="searchinput">
+        <i class="searchicon fa fa-search"></i>
+        <div class="searchhelper">搜索...</div>
+    </div>
+    <!-- /Page Sidebar Header -->
+    <!-- Sidebar Menu -->
+    <ul class="nav sidebar-menu">
+        <!--UI Elements-->
+        <li data-controller="['article','category','modeler','field']">
+            <a href="javascript:;" class="menu-dropdown">
+                <i class="menu-icon fa fa-file-o"></i>
+                <span class="menu-text"> 内容管理</span>
+                <i class="menu-expand"></i>
+            </a>
+
+            <ul class="submenu" style="display: none;">
+                <li data-rule="/admin/article">
+                    <a href="javascript:redirect('/admin/article/index');">
+                        <span class="menu-text">文章管理</span>
+                    </a>
+                </li>
+                <li data-rule="/admin/category">
+                    <a href="javascript:redirect('/admin/category/index');">
+                        <span class="menu-text">栏目管理</span>
+                    </a>
+                </li>
+                <li data-rule="/admin/modeler|/admin/field">
+                    <a href="javascript:redirect('/admin/modeler/index');">
+                        <span class="menu-text">模型管理</span>
+                    </a>
+                </li>
+            </ul>
+            
+        </li>
+        <!--Tables-->
+        <li data-controller="['admin','group','rule']">
+            <a href="javascript:;" class="menu-dropdown">
+                <i class="menu-icon fa fa-user"></i>
+                <span class="menu-text"> 管理员 </span>
+                <i class="menu-expand"></i>
+            </a>
+            <ul class="submenu">
+                <li data-rule="/admin/admin">
+                    <a href="javascript:redirect('/admin/admin/index');">
+                        <span class="menu-text">管理员列表</span>
+                    </a>
+                </li>
+                <li data-rule="/admin/group">
+                    <a href="javascript:redirect('/admin/group/index');">
+                        <span class="menu-text">管理员组</span>
+                    </a>
+                </li>
+                <li data-rule="/admin/rule">
+                    <a href="javascript:redirect('/admin/rule/index');">
+                        <span class="menu-text">权限管理</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!-- ads -->
+        <li data-controller="['ads','adsList']">
+            <a href="javascript:;" class="menu-dropdown">
+                <i class="menu-icon fa fa-tags"></i>
+                <span class="menu-text"> 广告管理 </span>
+
+                <i class="menu-expand"></i>
+            </a>
+            <ul class="submenu">
+                <li data-rule="/admin/ads|/admin/adsList">
+                    <a href="javascript:redirect('/admin/ads/index');">
+                        <span class="menu-text">广告板块</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!-- member -->
+        <li data-controller="['member']">
+            <a href="javascript:;" class="menu-dropdown">
+                <i class="menu-icon fa fa-users"></i>
+                <span class="menu-text"> 会员管理 </span>
+                <i class="menu-expand"></i>
+            </a>
+            <ul class="submenu">
+                <li data-rule="/admin/member/index">
+                    <a href="javascript:redirect('/admin/member/index');">
+                        <span class="menu-text">会员列表</span>
+                    </a>
+                </li>
+                <!--<li>
+                    <a href="javascript:redirect('/admin/member/verify');">
+                        <span class="menu-text">会员审核</span>
+                    </a>
+                </li>-->
+                <li data-rule="/admin/member/group">
+                    <a href="javascript:redirect('/admin/member/group');">
+                        <span class="menu-text">会员组</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!-- log -->
+        <li data-controller="['log']">
+            <a href="javascript:;" class="menu-dropdown">
+                <i class="menu-icon fa fa-calendar"></i>
+                <span class="menu-text"> 操作记录 </span>
+                <i class="menu-expand"></i>
+            </a>
+            <ul class="submenu">
+                <li data-rule="/admin/log">
+                    <a href="javascript:redirect('/admin/log/index');">
+                        <span class="menu-text">日志记录</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!--Seting-->
+        <li data-controller="['setup']">
+            <a href="javascript:;" class="menu-dropdown">
+                <i class="menu-icon fa fa-cog"></i>
+                <span class="menu-text"> 设置 </span>
+
+                <i class="menu-expand"></i>
+            </a>
+            <ul class="submenu">
+                <li data-rule="/admin/setup/index">
+                    <a href="javascript:redirect('/admin/setup/index');">
+                        <span class="menu-text">站点设置</span>
+                    </a>
+                </li>
+                <li data-rule="/admin/setup/upload">
+                    <a href="javascript:redirect('/admin/setup/upload');">
+                        <span class="menu-text">附件上传</span>
+                    </a>
+                </li>
+                <li data-rule="/admin/setup/verify">
+                    <a href="javascript:redirect('/admin/setup/verify');">
+                        <span class="menu-text">验证码设置</span>
+                    </a>
+                </li>
+                <li data-rule="/admin/setup/vater">
+                    <a href="javascript:redirect('/admin/setup/vater');">
+                        <span class="menu-text">水印设置</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!-- 数据备份 -->
+        <li data-controller="['database']">
+            <a href="javascript:;" class="menu-dropdown">
+                <i class="menu-icon fa fa-briefcase"></i>
+                <span class="menu-text"> 备份与恢复 </span>
+                <i class="menu-expand"></i>
+            </a>
+            <ul class="submenu">
+                <li data-rule="/admin/database">
+                    <a href="javascript:redirect('/admin/database/index');">
+                        <span class="menu-text">数据库</span>
+                    </a>
+                </li>
+                <!--<li>
+                    <a href="javascript:redirect('/admin/back/upload');">
+                        <span class="menu-text">网站资料</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:redirect('/admin/back/code');">
+                        <span class="menu-text">网站程序</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:redirect('/admin/back/all');">
+                        <span class="menu-text">备份全部</span>
+                    </a>
+                </li>-->
+            </ul>
+        </li>
+    </ul>
+    <!-- /Sidebar Menu -->
+</div>

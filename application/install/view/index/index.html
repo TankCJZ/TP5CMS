@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<!-- Head -->
+<head>
+    <meta charset="utf-8">
+    <title>TP5CMS安装界面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="install page">
+    <!--Basic Styles-->
+    <link href="__PUBLIC__css/bootstrap.css" rel="stylesheet">
+    <link href="__PUBLIC__css/font-awesome.css" rel="stylesheet">
+    <!--Beyond styles-->
+    <link id="beyond-link" href="__PUBLIC__css/beyond.css" rel="stylesheet">
+</head>
+<!-- /Head -->
+<!-- Body -->
+<body>
+    <!-- Main Container -->
+    <div class="main-container container-fluid">
+        <!-- Page Container -->
+        <div class="page-container">
+            <!-- Page Content -->
+            <div class="page-content install">
+                <!-- Page Body -->
+                <div class="page-body">
+                    
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <div class="widget">
+                                <div class="widget-header bg-themeprimary">
+                                    <h4 class="widget-caption">TP5CMS安装界面</h4>
+                                </div>
+                                <div class="widget-body">
+                                    <div id="WiredWizard" class="wizard wizard-wired" data-target="#WiredWizardsteps">
+                                        <ul class="steps">
+                                            <li data-target="#wiredstep1" class="active"><span class="step">1</span><span class="title">安装说明</span><span class="chevron"></span></li>
+                                            <li data-target="#wiredstep2"><span class="step">2</span><span class="title">文件权限</span> <span class="chevron"></span></li>
+                                            <li data-target="#wiredstep3"><span class="step">3</span><span class="title">账号信息</span> <span class="chevron"></span></li>
+                                        </ul>
+
+                                    </div>
+                                    <div class="step-content" id="WiredWizardsteps">
+                                        <div class="step-pane active" id="wiredstep1">
+                                            <h3>ThinkPHP5的环境要求：</h3>
+                                            <p>&nbsp;&nbsp;PHP >= 5.4.0 （完美支持PHP7）</p>
+                                            <p>&nbsp;&nbsp;PDO PHP Extension</p>
+                                            <p>&nbsp;&nbsp;MBstring PHP Extension</p>
+                                            <p>&nbsp;&nbsp;CURL PHP Extension</p>
+                                            <p>linux环境下需要给runtime目录755权限。</p>
+                                        </div>
+                                        <div class="step-pane" id="wiredstep2">
+                                            <h3>需要写入权限的目录：</h3>
+                                            <p>&nbsp;&nbsp;runtime/</p>
+                                            <p>&nbsp;&nbsp;public/upload</p>
+                                            <p>&nbsp;&nbsp;backup/</p>
+                                        </div>
+                                        <div class="step-pane" id="wiredstep3">
+                                            <div id="config">
+                                                <form role="form" action="">
+                                                    <div class="form-title">
+                                                        数据库信息
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <span class="input-icon icon-right">
+                                                            <input type="text" class="form-control" id="host" placeholder="主机:127.0.0.1">
+                                                        </span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <span class="input-icon icon-right">
+                                                            <input type="text" class="form-control" id="port" placeholder="端口:port">
+                                                        </span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <span class="input-icon icon-right">
+                                                            <input type="text" class="form-control" id="username" placeholder="账号:root">
+                                                        </span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <span class="input-icon icon-right">
+                                                            <input type="text" class="form-control" id="password" placeholder="密码:root">
+                                                        </span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <span class="input-icon icon-right">
+                                                            <input type="text" class="form-control" id="prefx" placeholder="表前缀" value="表前缀:think_">
+                                                        </span>
+                                                    </div>
+                                                    <div class="form-title">
+                                                        超级管理员
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <span class="input-icon icon-right">
+                                                            <input type="text" class="form-control" id="adminusername" placeholder="账号">
+                                                        </span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <span class="input-icon icon-right">
+                                                            <input type="password" class="form-control" id="adminpassword" placeholder="密码">
+                                                        </span>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="actions actions-footer text-center" id="WiredWizard-actions">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-info btn-md btn-next" data-last="开始安装">下一步<i class="fa fa-angle-right"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+        </div>
+        <!-- /Page Container -->
+    </div>
+    <!--Basic Scripts-->
+    <script src="__PUBLIC__js/jquery-2.1.3.min.js"></script>
+    <script src="__PUBLIC__js/bootstrap.js"></script>
+    <!--Beyond Scripts-->
+    <script src="__PUBLIC__js/beyond.js"></script>
+    <!--Page Related Scripts-->
+    <script src="__PUBLIC__js/wizard/wizard-custom.js"></script>
+
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $('#WiredWizard').wizard();
+        });
+    </script>
+   
+     
+</body>
+<!--  /Body -->
+</html>

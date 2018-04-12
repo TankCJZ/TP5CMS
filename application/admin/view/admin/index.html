@@ -1,0 +1,240 @@
+{include file='public/header' title='网站首页-管理员列表'}
+<link href="__PUBLIC__css/dataTables.bootstrap.css" rel="stylesheet">
+<style>
+    #admintables tbody>tr>td{
+        text-align: center;
+    }
+</style>
+<body>
+    <!-- 头部 -->
+    {include file="public/header_min"}
+    <!-- /头部 -->
+    <div class="main-container container-fluid">
+        <div class="page-container">
+            <!-- Page Sidebar -->
+            {include file="public/slidebar"}
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="{url('Admin/index')}">管理员</a>
+                        </li>
+                        <li class="active">管理员列表</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Header -->
+                <div class="page-header position-relative">
+                    <div class="header-title">
+                        <h1>
+                            管理员列表
+                        </h1>
+                    </div>
+                    <!--Header Buttons-->
+                    <div class="header-buttons">
+                        <a class="sidebar-toggler" href="#">
+                            <i class="fa fa-arrows-h"></i>
+                        </a>
+                        <a class="refresh" id="refresh-toggler" href="">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        <a class="fullscreen active" id="fullscreen-toggler" href="#">
+                            <i class="glyphicon glyphicon-fullscreen"></i>
+                        </a>
+                    </div>
+                    <!--Header Buttons End-->
+                </div>
+                <!-- /Page Header -->
+                <!-- Page Body -->
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12">
+                            <div class="widget">
+                                <div class="widget-header ">
+                                    <span class="widget-caption">管理员列表</span>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="table-toolbar">
+                                        <div class="btn-group">
+                                            <a href="javascript:;" class="btn btn-default add-admin"><i class="fa fa-plus"></i>添加管理员</a>
+                                        </div>
+                                        <div class="btn-group pull-right">
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-hover table-bordered" id="admintables">
+                                            <thead>
+                                                <tr role="row">
+                                                    <th class="col-xs-1 text-center">
+                                                        序号
+                                                    </th>
+                                                    <th class="text-center">
+                                                        用户名
+                                                    </th>
+                                                    <th class="col-xs-2 text-center">
+                                                        所属角色
+                                                    </th>
+                                                    <th class="col-xs-2 text-center">
+                                                        最后登录IP
+                                                    </th>
+                                                    <th class="col-xs-2 text-center">
+                                                        最后登录时间
+                                                    </th>
+                                                    <th class="col-xs-1 text-center">
+                                                        状态
+                                                    </th>
+                                                    <th class="col-xs-2 text-center">
+                                                        管理操作
+                                                    </th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <!-- /Page Body -->
+        </div>
+        <!-- /添加管理员 model -->
+        <div id="addAdminModel" style="display:none;">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form class="form-horizontal" id="add-admin-form">
+                        <div class="form-group">
+                            <label for="username" class="col-sm-3 control-label text-center">用户名</label>
+                            <div class="col-sm-8">
+                                <input value="" placeholder="必填" type="text" name="username" class="form-control" id="username">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="col-sm-3 control-label text-center">密码</label>
+                            <div class="col-sm-8">
+                                <input value="" placeholder="必填" type="text" name="password" class="form-control" id="password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password2" class="col-sm-3 control-label text-center">确认密码</label>
+                            <div class="col-sm-8">
+                                <input value="" placeholder="必填" type="text" name="password2" class="form-control" id="password2">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="col-sm-3 control-label text-center">邮箱</label>
+                            <div class="col-sm-8">
+                                <input value="" type="text" name="email" class="form-control" id="email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label text-center">是否启用</label>
+                            <div class="col-sm-8">
+                                <div class="radio inline-block">
+                                    <label>
+                                        <input name="status" value="1" type="radio" checked="">
+                                        <span class="text">启用</span>
+                                    </label>
+                                </div>
+                                <div class="radio inline-block">
+                                    <label>
+                                        <input name="status" value="0" type="radio">
+                                        <span class="text">禁用</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="title" class="col-sm-3 control-label text-center">管理员组</label>
+                            <div class="col-sm-8">
+                                <select name="group_id" style="width: 100%;" id="group_id">
+                                    <option value="1">超级管理员</option>
+                                </select>
+                            </div>
+                            
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success add-admin-btn">添加管理员</button>
+                </div>
+            </div>
+        </div>
+        <!-- /管理员修改 model -->
+        <div id="editAdminModel" style="display:none;">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form class="form-horizontal" id="edit-admin-form">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label text-center">用户名</label>
+                            <div class="col-sm-8">
+                                <input value="" disabled="disabled" placeholder="必填" type="text" name="username" class="form-control username">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label text-center">密码</label>
+                            <div class="col-sm-8">
+                                <input value="" placeholder="留空则不修改密码" type="text" name="password" class="form-control password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label text-center">确认密码</label>
+                            <div class="col-sm-8">
+                                <input value="" placeholder="留空则不修改密码" type="text" name="password2" class="form-control password2">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label text-center">邮箱</label>
+                            <div class="col-sm-8">
+                                <input value="" type="text" name="email" class="form-control email" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label text-center">是否启用</label>
+                            <div class="col-sm-8">
+                                <div class="radio inline-block">
+                                    <label>
+                                        <input name="status" type="radio" class="checked" value="1">
+                                        <span class="text">启用</span>
+                                    </label>
+                                </div>
+                                <div class="radio inline-block">
+                                    <label>
+                                        <input class="unchecked" name="status" type="radio" value="0">
+                                        <span class="text">禁用</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="title" class="col-sm-3 control-label text-center">管理员组</label>
+                            <div class="col-sm-8">
+                                <select name="group_id" class="group_id" style="width: 100%;">
+                                    
+                                </select>
+                            </div>
+                            <input type="hidden" name="id" value="" class="id">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success edit-admin-btn">修改</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    {include file='public/footer'}
+    <script src="__PUBLIC__js/datatable/jquery.dataTables.min.js"></script>
+    <script src="__PUBLIC__js/datatable/dataTables.bootstrap.min.js"></script>
+    <script src="__PUBLIC__js/admin/admin.tables.js"></script>
+</body>
+</html>

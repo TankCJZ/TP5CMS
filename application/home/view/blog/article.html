@@ -1,0 +1,24 @@
+{include file="blog/header"}
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 blog-main">
+          <div class="blog-post">
+            <h2 class="blog-post-title">{$article['title']}</h2>
+            <p class="blog-post-meta">这篇文章发布于 2017年08月17日，星期四，00:51</p>
+
+            <blockquote>
+              <p>{$article.description}</p>
+            </blockquote>
+            {if condition="$article.html"}
+            <p>
+            <a href="/upload/{$article.html}" class="btn btn-info" target="_blank">查看Demo</a>
+            </p>
+            {else /}
+            {/if}
+            {$article.content|htmlspecialchars_decode}
+          </div>
+        </div>
+        {include file="blog/right"}
+      </div><!-- /.row -->
+    </div><!-- /.container -->
+    {include file="blog/footer"}

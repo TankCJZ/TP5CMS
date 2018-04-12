@@ -1,0 +1,50 @@
+<!--Basic Scripts-->
+<script src="__PUBLIC__js/jquery-2.1.3.min.js"></script>
+<script src="__PUBLIC__js/bootstrap.js"></script>
+<script src="__PUBLIC__js/jquery.slimscroll.min.js"></script>
+<script src="__PUBLIC__js/beyond.js"></script>
+<script src="__PUBLIC__js/layer/layer.js"></script>
+<script src="__PUBLIC__js/login.js"></script>
+<script src="__PUBLIC__js/common.js"></script>
+<script>
+   (function(){
+       
+       var module = "{$Request.module}".toLowerCase();
+       var controller = "{$Request.controller}".toLowerCase();
+       var action = "{$Request.action}".toLowerCase();
+
+       var path = '/' + module + '/' +controller;
+       var nav = $('#sidebar ul.nav');
+       var controller_lis = nav.find("li[data-controller]");
+       var open = 'open',
+           active = 'active',
+           cons = [];
+       Array.from(controller_lis).forEach(function(ele){
+            var c = $(ele).data('controller');
+            if( c.indexOf(controller) > -1 ){
+                //添加open类
+                controller_lis.removeClass(open);
+                $(ele).addClass(open);
+                //添加active类
+                var sub = $(ele).find('.submenu li[data-rule]');
+                Array.from(sub).forEach(function(ele){
+                    var rule = $(ele).data('rule');
+                    console.log('mc:[' + path + ']<==>rule:[' + rule + ']');
+
+                    if( rule.indexOf(path) > -1 ){
+                        sub.removeClass(active);
+                        $(ele).addClass(active);
+                    }
+
+                },this);
+            }
+       },this);
+       //清理缓存
+       $('.cleartmp').on('click',function(){
+           $.getJSON('/admin/cache/index',function(res){
+               layer.msg(res.msg,{icon:res.code});
+           });
+       });
+   })();
+
+</script>

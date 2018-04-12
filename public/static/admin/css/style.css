@@ -1,0 +1,124 @@
+@charset "utf-8";
+.inline-block {
+    display: inline-block !important;
+}
+
+.captcha-text {
+    width: 40%;
+}
+.wid260{
+    width: 260px;
+}
+.pd0{
+    padding: 0;
+}
+.height20{
+    height: 20px !important;
+}
+.margin-b0{
+    margin-bottom: 0 !important;
+}
+
+.captcha {
+    -webkit-box-shadow: 1px 1px 1px #eee;
+    -moz-box-shadow: 1px 1px 1px #eee;
+    -ms-box-shadow: 1px 1px 1px #eee;
+    box-shadow: 1px 1px 1px #eee;
+    vertical-align: top;
+}
+.sys-info-list{
+    padding: 0;
+}
+.sys-info-list li {
+    line-height: 35px;
+    border-bottom: 1px dashed #eaeaea;
+}
+li{
+    list-style: none;
+}
+.res-lab {
+    color: #909090;
+}
+.res-lab {
+    display: inline-block;
+    width: 120px;
+    padding-right: 10px;
+    text-align: right;
+}
+/*admin thumb css*/
+.thumb-box{
+    padding-top:5px;
+    position:relative;
+}
+.thumb-box .thumb{
+    position: absolute;
+    bottom: 45%;
+    width: 70px;
+    left: 45px;
+    opacity: .01;
+    z-index: 999;
+}
+.thumb-box .file-info{
+    position: absolute;
+    bottom: 40%;
+    width: 70px;
+    left: 45px;
+    color: #fff;
+    border: 1px solid #ddd;
+    padding: 3px;
+    border-radius: 2px;
+}
+.val-middle{
+    vertical-align: middle;
+}
+.DTTT.btn-group{
+    display: none;
+}
+
+.upload-button{
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    min-width: 60px;
+    height: 33px;
+    line-height: 33px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    overflow: hidden;
+    cursor: pointer;
+    color: #444;
+    background-color: #fff;
+}
+.upload-button:hover{
+    border: 1px solid #aaa;
+    color: #333;
+}
+.upload-button input{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    font-size: 100px;
+    width: 100%;
+    height: 100%;
+    opacity: .01;
+}
+.upload-label{
+    vertical-align: -webkit-baseline-middle !important;
+}
+.upload-button span.upload-icon{
+    display: block;
+    margin: 0 15px;
+    text-align: center;
+}
+.upload-info.show{
+    display: inline-block;
+    padding: 5px;
+    border: 1px solid #ccc;
+    height: 33px;
+}
+.input-wrap{
+    border: 1px solid #eee;
+    padding: 25px 10px 10px 10px;
+    border-radius: 2px;
+}

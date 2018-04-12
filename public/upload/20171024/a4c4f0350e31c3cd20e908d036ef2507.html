@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Javascript优化递归效率Memoization技术《JavaScript经典实例-笔记》</title>
+</head>
+<body>
+	<script type="text/javascript">
+		
+		var fib = function(n){
+			return n < 2 ? n : fib(n - 1) + fib(n - 2);
+		};
+
+
+		var memo = function(){
+			var cache = [0,1];
+			var _fib = function(n){
+				var result = cache[n];
+				if( typeof result != "number" ){
+					result = _fib(n-1) + _fib(n-2);
+					cache[n] = result;
+				}
+				return result;
+			};
+			return _fib;
+		}();
+
+		console.time('no-memo');
+		for (var i = 0 ; i <= 30; i++) {
+			console.log(i + " " + fib(i) );
+		}
+		console.timeEnd('no-memo');
+
+
+		console.time('memo');
+		for (var i = 0 ; i <= 30; i++) {
+			console.log(i + " " + memo(i) );
+		}
+		console.timeEnd('memo');
+
+
+
+
+
+	</script>
+</body>
+</html>

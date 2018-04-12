@@ -1,0 +1,22 @@
+<?php
+return array (
+  'site_name' => 'TP5CMS',
+  'site_domain' => 'http://tp5cms.jion-chen.com',
+  'site_ico' => '/favicon.ico',
+  'title' => 'TP5CMS',
+  'keywords' => 'TP5CMS,ThinkPHP5,基于ThinkPHP5开发的CMS内容管理系统',
+  'description' => '基于ThinkPHP5开发的CMS内容管理系统',
+  'telphone' => '888888',
+  'mobile' => '888888',
+  'fax' => '888888-9999',
+  'weixin' => '888888',
+  'qq' => '888888',
+  'email' => '888888@qq.com',
+  'icp' => 'ICP88888',
+  'copyright' => 'Powered &amp; Designed by TP5CMS',
+  'address' => '地址信息',
+  'other1' => '自定义字段一',
+  'other2' => '自定义字段二',
+  'css' => '',
+  'js' => '',
+);

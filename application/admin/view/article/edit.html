@@ -1,0 +1,283 @@
+{include file='public/header' title='网站首页-修改文章'}
+
+<body>
+    <!-- 头部 -->
+    {include file="public/header_min"}
+    <!-- /头部 -->
+    <div class="main-container container-fluid">
+        <div class="page-container">
+            <!-- Page Sidebar -->
+            {include file="public/slidebar"}
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="{url('Article/index')}">文章管理</a>
+                        </li>
+                        <li class="active">修改文章</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Header -->
+                <div class="page-header position-relative">
+                    <div class="header-title">
+                        <h1>
+                            文章-{$article['title']}[{$cate['catename']}]-修改
+                        </h1>
+                    </div>
+                    <!--Header Buttons-->
+                    <div class="header-buttons">
+                        <a class="sidebar-toggler" href="#">
+                            <i class="fa fa-arrows-h"></i>
+                        </a>
+                        <a class="refresh" id="refresh-toggler" href="">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        <a class="fullscreen active" id="fullscreen-toggler" href="#">
+                            <i class="glyphicon glyphicon-fullscreen"></i>
+                        </a>
+                    </div>
+                    <!--Header Buttons End-->
+                </div>
+                <!-- /Page Header -->
+                <!-- Page Body -->
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <div class="widget">
+                                <div class="widget-header bordered-bottom bordered-green">
+                                    <span class="widget-caption">修改文章</span>
+                                </div>
+                                <div class="widget-body">
+                                    <div>
+                                        <form class="form-horizontal" action="#" id="article-edit-form" method="post">
+
+                                        {volist name="fields" id="f"} 
+                                            {if condition="$f.name == 'catid'"}
+                                                <div class="form-group">
+                                                    <label for="catename" class="col-sm-1 control-label no-padding-right">{$f.fieldname}</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="hidden" name="catid" value="{$cate.id}">
+                                                        <input disabled="disabled" class="form-control" value="{$cate.catename}" type="text">
+                                                    </div>
+                                                    <p class="help-block col-sm-5 red"><span class="label label-info">栏目名称不能修改!</span></p>
+                                                </div>
+                                            {else/}
+                                                {switch name="f.datatype"}
+                                                    {case value="string"}
+                                                        <div class="form-group">
+                                                            <label for="{$f.name}" class="col-sm-1 control-label no-padding-right">{$f.fieldname}</label>
+                                                            <div class="col-sm-6">
+                                                                <input id="{$f.name}" require class="form-control" placeholder="" name="{$f.name}" value="{$article[$f.name]}" type="text">
+                                                            </div>
+                                                            <p class="help-block col-sm-5 red"><span class="label label-info">{$f.prom}</span></p>
+                                                        </div>
+                                                    {/case}
+                                                    {case value="strings"}
+                                                        <div class="form-group">
+                                                            <label for="{$f.name}" class="col-sm-1 control-label no-padding-right">{$f.fieldname}</label>
+                                                            <div class="col-sm-6">
+                                                                <textarea name="{$f.name}" class="form-control" rows="6" id="{$f.name}" placeholder="">{$article[$f.name]}</textarea>
+                                                            </div>
+                                                        </div>
+                                                    {/case}
+                                                    {case value="int"}
+                                                        <div class="form-group">
+                                                            <label for="{$f.name}" class="col-sm-1 control-label no-padding-right">{$f.fieldname}</label>
+                                                            <div class="col-sm-4">
+                                                                <input id="{$f.name}" class="form-control" name="{$f.name}" value="{$article[$f.name]}" type="number">
+                                                            </div>
+                                                        </div>
+                                                    {/case}
+                                                    {case value="time"}
+                                                        <div class="form-group">
+                                                            <label for="{$f.name}" class="col-sm-1 control-label no-padding-right">{$f.fieldname}</label>
+                                                            <div class="col-sm-4">
+                                                                <div class="input-group">
+                                                                    <input name="{$f.name}" data-time value="{$article[$f.name]|date='Y-m-d',###}" class="form-control date-picker" type="text" data-date-format="yyyy-mm-dd">
+                                                                    <span class="input-group-addon">
+                                                                        <i class="fa fa-calendar"></i>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    {/case}
+                                                    {case value="editor"}
+                                                        <div class="form-group">
+                                                            <label for="{$f.name}" class="col-sm-1 control-label no-padding-right">{$f.fieldname}</label>
+                                                            <div class="col-sm-10">
+                                                                <textarea name="{$f.name}" class="summernote">{$article[$f.name]}</textarea>
+                                                            </div>
+                                                        </div>
+                                                    {/case}
+                                                    {case value="image"}
+                                                        <div class="form-group">
+                                                            <label for="{$f.name}" class="val-middle col-sm-1 control-label no-padding-right">{$f.fieldname}</label>
+                                                            <div class="col-sm-10" style="padding-top:5px;">
+                                                                <label class="upload-label">
+                                                                    <span class="upload-info {$article[$f.name]?'show':''}">{$article[$f.name]}</span>
+                                                                    <input type="hidden" value="{$article[$f.name]}" name="{$f.name}" class="upload-input">
+                                                                </label>
+                                                                <div class="upload-button">
+                                                                    <input type="file" name="_image" class="article-thumb" value="">
+                                                                    <span class="upload-icon"><i class="fa fa-plus-circle"></i>上传图片</span>
+                                                                </div>
+                                                                <a href="javascript:;" class="{$article[$f.name]?'':'hide'} btn btn-danger upload-cancel">取消</a>
+                                                            </div>
+                                                        </div>
+                                                    {/case}
+                                                    {case value="images"}
+                                                        <div class="form-group">
+                                                            <label for="{$f.name}" class="val-middle col-sm-1 control-label no-padding-right">{$f.fieldname}</label>
+                                                            <div class="col-sm-10" style="padding-top:5px;">
+                                                                <table class="table table-bordered table-hover images-upload-comp">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td colspan="3" class="text-center">
+                                                                                <span class="label label-info">最多上传10张图片文件！</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody data-input-name="{$f.name}">
+                                                                        {php}
+                                                                           $arr = object2array(json_decode($article[$f['name']]));
+                                                                        {/php}
+                                                                        {volist name="arr.url" id="vo"}
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <input type="text" name="<?php echo $f['name'];?>_img_url[]" class="form-control input-sm" value="{$vo}">
+                                                                                </td>
+                                                                                <td class="col-xs-4 col-sm-4">
+                                                                                    <input name="<?php echo $f['name'];?>_img_name[]" type="text" class="form-control input-sm" value="{$arr['name'][$i-1]}">
+                                                                                </td>
+                                                                                <td>
+                                                                                    <a class="btn btn-xs btn-danger remove-file">移除</a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        {/volist}
+                                                                    </tbody>
+                                                                    <tfoot>
+                                                                        <tr>
+                                                                            <td colspan="3">
+                                                                                <div class="upload-button">
+                                                                                    <input type="file" name="_image" class="article-images" value="">
+                                                                                    <span class="upload-icon"><i class="fa fa-plus-circle"></i>上传图片</span>
+                                                                                </div>
+                                                                                <a href="javascript:;" class="hide btn btn-danger upload-cancel">取消</a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tfoot>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    {/case}
+                                                    {case value="file"}
+                                                        <div class="form-group">
+                                                            <label for="{$f.name}" class="val-middle col-sm-1 control-label no-padding-right">{$f.fieldname}</label>
+                                                            <div class="col-sm-10" style="padding-top:5px;">
+                                                                <label class="upload-label">
+                                                                    <span class="upload-info {$article[$f.name]?'show':''}">{$article[$f.name]}</span>
+                                                                    <input type="hidden" value="{$article[$f.name]}" name="{$f.name}" class="upload-input">
+                                                                </label>
+                                                                <div class="upload-button">
+                                                                    <input type="file" name="_file" class="article-file" value="">
+                                                                    <span class="upload-icon"><i class="fa fa-plus-circle"></i>上传文件</span>
+                                                                </div>
+                                                                <a href="javascript:;" class="{$article[$f.name]?'':'hide'} btn btn-danger upload-cancel">取消</a>
+                                                            </div>
+                                                        </div>
+                                                    {/case}
+                                                    {case value="files"}
+                                                        <div class="form-group">
+                                                            <label for="{$f.name}" class="val-middle col-sm-1 control-label no-padding-right">{$f.fieldname}</label>
+                                                            <div class="col-sm-10" style="padding-top:5px;">
+                                                                <table class="table table-bordered table-hover files-upload-comp">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td colspan="3" class="text-center">
+                                                                                <span class="label label-info">最多上传10个附件！</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody data-input-name="{$f.name}">
+                                                                        {php}
+                                                                           $arr = object2array(json_decode($article[$f['name']]));
+                                                                        {/php}
+                                                                        {volist name="arr.url" id="vo"}
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <input type="text" name="<?php echo $f['name'];?>_file_url[]" class="form-control input-sm" value="{$vo}">
+                                                                                </td>
+                                                                                <td class="col-xs-4 col-sm-4">
+                                                                                    <input name="<?php echo $f['name'];?>_file_name[]" type="text" class="form-control input-sm" value="{$arr['name'][$i-1]}">
+                                                                                </td>
+                                                                                <td>
+                                                                                    <a class="btn btn-xs btn-danger remove-file">移除</a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        {/volist}
+                                                                    </tbody>
+                                                                    <tfoot>
+                                                                        <tr>
+                                                                            <td colspan="3">
+                                                                                <div class="upload-button">
+                                                                                    <input type="file" name="_file" class="article-files" value="">
+                                                                                    <span class="upload-icon"><i class="fa fa-plus-circle"></i>上传文件</span>
+                                                                                </div>
+                                                                                <a href="javascript:;" class="hide btn btn-danger upload-cancel">取消</a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tfoot>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    {/case}
+                                                    {case value="radio"}
+                                                        <div class="form-group status">
+                                                            <label for="{$f.name}" class="col-sm-1 control-label no-padding-right">{$f.fieldname}</label>
+                                                            <div class="col-sm-6" style="padding-top:6px;">
+                                                                <label>
+                                                                    <input name="{$f.name}" value="1" class="checkbox-slider" type="checkbox" {$article[$f.name]?'checked="checked"':''}>
+                                                                    <span class="text"></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    {/case}
+                                                {/switch}
+                                            {/if}
+                                        {/volist}
+                                            <input type="hidden" name="modelid" value="{$cate.modelid}">
+                                            <input type="hidden" name="id" value="{$article.id}">
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-1 col-sm-10">
+                                                    <button type="submit" class="btn btn-default article-edit">修改文章</button>
+                                                    <a class="btn btn-primary" href="javascript:window.history.go(-1);">返回</a>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Page Body -->
+        </div>
+        <!-- /Page Content -->
+    </div>
+    </div>
+    {include file='public/footer'}
+    <script src="__PUBLIC__js/common.js"></script>
+    <script src="__PUBLIC__js/summernote/summernote.min.js"></script>
+    <script src="__PUBLIC__js/summernote/lang/summernote-zh-CN.js"></script>
+    <script src="__PUBLIC__js/date/bootstrap-datepicker.js"></script>
+    <script src="__PUBLIC__js/date/bootstrap-datepicker.zh-CN.min.js"></script>
+    <script src="__PUBLIC__js/summernote/init.js"></script>
+    <script src="__PUBLIC__js/article/article.js"></script>
+</body>
+</html>

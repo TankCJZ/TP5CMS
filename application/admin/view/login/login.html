@@ -1,0 +1,32 @@
+{include file='public/header' title='管理员登录'}
+<!--Head Ends-->
+<body>
+    <div class="login-container animated fadeInDown">
+        <form action="/admin/doLogin" method="post" class="login-from">
+            <div class="loginbox bg-white">
+                <div class="loginbox-title">SIGN IN</div>
+                <div class="loginbox-textbox">
+                    <input value="test" id="uname" class="form-control uname" placeholder="用户名" name="username" type="text">
+                </div>
+                <div class="loginbox-textbox">
+                    <input id="pass" class="form-control pass" placeholder="密码" name="password" type="password" value="test123">
+                </div>
+                {if condition="$Think.config.captcha.on == true"}
+                <div class="loginbox-textbox">
+                    <input id="code" maxlength="4" class="form-control captcha-text inline-block" placeholder="验证码" name="captcha" type="text">
+                    <img class="captcha inline-block" width="120" height="34" src="{:captcha_src()}" alt="点击图片更换验证码" title="点击图片更换验证码">
+                </div>
+                {/if}
+                <div class="loginbox-submit">
+                    <input class="btn btn-primary btn-block do-login" value="登录" type="submit">
+                </div>
+            </div>
+            <div class="logobox">
+                <p class="text-center">Design by <a href="http://github.com/TankCJZ/TP5CMS" target="_blank">TP5CMS</a></p>
+            </div>
+        </form>
+    </div>
+    {include file='public/footer'}
+</body>
+<!--Body Ends-->
+</html>

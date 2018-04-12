@@ -1,0 +1,67 @@
+<div class="navbar">
+        <div class="navbar-inner">
+            <div class="navbar-container clearfix">
+                <!-- Navbar Barnd -->
+                <div class="navbar-header pull-left">
+                    <a href="/admin/index" class="navbar-brand">
+                    <small>
+                        <!--<img src="/static/admin/images/logo.png" alt="">-->
+                        <span>TP5CMS</span>
+                    </small>
+                </a>
+                </div>
+                <!-- /Navbar Barnd -->
+                <!-- Sidebar Collapse -->
+                <div class="sidebar-collapse" id="sidebar-collapse">
+                    <i class="collapse-icon fa fa-bars"></i>
+                </div>
+                <!-- /Sidebar Collapse -->
+                <!-- Account Area and Settings -->
+                <div class="navbar-header pull-right">
+                    <div class="navbar-account">
+                        <ul class="account-area">
+                            <li>
+                                <a target="_blank" href="{$Think.config.site.site_domain}" title="网站首页">
+                                    <i class="icon fa fa-home"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a title="清空网站缓存" href="javascript:;" class="cleartmp" title="更新缓存">
+                                    <i class="icon fa fa-refresh"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="login-area dropdown-toggle" data-toggle="dropdown">
+                                    <div class="avatar" title="View your public profile">
+                                        <img src="/public/upload/thumb/{$Request.session.uname}.jpg">
+                                    </div>
+                                    <section>
+                                        <h2><span class="profile"><span>{$Request.session.uname}</span></span>
+                                        </h2>
+                                    </section>
+                                </a>
+                                <!--Login Area Dropdown-->
+                                <ul class="pull-right dropdown-menu dropdown-arrow dropdown-login-area">
+                                    <li class="username"><a>David Stevenson</a></li>
+                                    <li class="dropdown-footer">
+                                        <a href="/admin/edit/{$Request.session.uid}">
+                                            修改密码
+                                        </a>
+                                    </li>
+                                    <li class="dropdown-footer">
+                                        <a href="/admin/logout">
+                                            退出登录
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!--/Login Area Dropdown-->
+                            </li>
+                            <!-- /Account Area -->
+                        </ul>
+                        
+                    </div>
+                </div>
+                <!-- /Account Area and Settings -->
+            </div>
+        </div>
+    </div>

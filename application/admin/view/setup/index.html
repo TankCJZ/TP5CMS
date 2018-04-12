@@ -1,0 +1,203 @@
+{include file='public/header' title='网站首页-站点设置'}
+<body>
+    <!-- 头部 -->
+    {include file="public/header_min"}
+    <!-- /头部 -->
+    <div class="main-container container-fluid">
+        <div class="page-container">
+            <!-- Page Sidebar -->
+            {include file="public/slidebar"}
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="{url('Site/index')}">站点设置</a>
+                        </li>
+                        <li class="active">站点设置</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Header -->
+                <div class="page-header position-relative">
+                    <div class="header-title">
+                        <h1>
+                            站点设置
+                        </h1>
+                    </div>
+                    <!--Header Buttons-->
+                    <div class="header-buttons">
+                        <a class="sidebar-toggler" href="#">
+                            <i class="fa fa-arrows-h"></i>
+                        </a>
+                        <a class="refresh" id="refresh-toggler" href="">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        <a class="fullscreen active" id="fullscreen-toggler" href="#">
+                            <i class="glyphicon glyphicon-fullscreen"></i>
+                        </a>
+                    </div>
+                    <!--Header Buttons End-->
+                </div>
+                <!-- /Page Header -->
+                <!-- Page Body -->
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12">
+                            <div class="widget">
+                                <div class="widget-header ">
+                                    <span class="widget-caption">站点设置</span>
+                                </div>
+                                <div class="widget-body">
+                                    <form class="form-horizontal" role="form" id="set-site-form">
+                                        <h5 class="row-title before-sky">基本信息</h5>
+                                        <div class="input-wrap">
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label no-padding-right">站点名称</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" name="site_name" value="{$Think.config.site.site_name}" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label no-padding-right">站点url</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" value="{$Think.config.site.site_domain}" name="site_domain">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label no-padding-right">ico</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" value="{$Think.config.site.site_ico}" name="site_ico">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h5 class="row-title before-sky">SEO</h5>
+                                        <div class="input-wrap">
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label no-padding-right">标题</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" name="title" value="{$Think.config.site.title}" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label no-padding-right">关键字</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" value="{$Think.config.site.keywords}" name="keywords">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label no-padding-right">描述</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" value="{$Think.config.site.description}" name="description">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h5 class="row-title before-sky">其他信息</h5>
+                                        <div class="input-wrap">
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label no-padding-right">电话</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" name="telphone" value="{$Think.config.site.telphone}" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label no-padding-right">手机</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" value="{$Think.config.site.mobile}" name="mobile">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label no-padding-right">传真</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="fax" value="{$Think.config.site.fax}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label no-padding-right">微信</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" name="weixin" class="form-control" value="{$Think.config.site.weixin}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label no-padding-right">QQ</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="qq" value="{$Think.config.site.qq}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label no-padding-right">邮箱</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="email" value="{$Think.config.site.email}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label no-padding-right">备案号</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" name="icp" class="form-control" value="{$Think.config.site.icp}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label no-padding-right">版权信息</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" name="copyright" class="form-control" value="{$Think.config.site.copyright}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label no-padding-right">地址</label>
+                                                <div class="col-sm-8">
+                                                    <textarea class="form-control" name="address" rows="4">{$Think.config.site.address}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label no-padding-right">自定义1</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="other1" value="{$Think.config.site.other1}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label no-padding-right">自定义2</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="other2" value="{$Think.config.site.other2}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h5 class="row-title before-sky">第三方代码</h5>
+                                        <div class="input-wrap">
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label no-padding-right">样式</label>
+                                                <div class="col-sm-8">
+                                                    <textarea class="form-control" name="css" rows="6" placeholder="改代码放置于head标签之前">{$Think.config.site.css}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label no-padding-right">脚本</label>
+                                                <div class="col-sm-8">
+                                                    <textarea class="form-control" name="js" rows="6" placeholder="改代码放置于body标签之前">{$Think.config.site.js}</textarea>
+                                                </div>
+                                            </div>
+                                             <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <button type="submit" class="btn btn-success btn-setting">设置</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <!-- /Page Body -->
+        </div>
+        <!-- /Page Content -->
+    </div>
+    </div>
+    {include file='public/footer'}
+    <script src="__PUBLIC__js/setup/index.js"></script>
+</body>
+</html>

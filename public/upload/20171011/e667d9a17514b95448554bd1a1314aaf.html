@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zn-CN">
+<head>
+	<meta charset="utf-8">
+	<title>正则表达式全局搜索并高亮显示结果</title>
+	<style type="text/css">
+		.found{
+			background-color: #ff0;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<form action="">
+			<textarea id="incoming" cols="150" rows="10">起初在DOS操作系统的年代里，很少用这个单词，但是到了Windows NT及以后的Windows系列系统就开始使用“Administrator”用户名作为系统默认的管理员，后来就为了省事，简单的缩写为“Admin”慢慢的各种各样的需要认证的软件都使用“Admin”、“Administrator”、“Guest”等单词来作为软件默认的用户名。
+Administrator的简写形式是Admin，中文意思就是“系统管理员”。即所谓的“超级用户”。administrator是电脑里权限不受控的人：
+每台电脑装上系统后，在你自己新建的账户外，会自动新建一个叫administrator 的管理计算机(域)的内置账户，它平时是隐藏的，它是计算机管理员的意思，是拥有计算机管理的最高权限，我们新建的账户都是在它下派生的。
+它的用途主要用于当常用账号下无法解决问题时，就会进入administrator账户，在这里账户里任何操作都是允许的(一般是在安全模式下进行的开机一直点按F8，选择安全模式,即可进入.维修电脑时多用)。它的密码默认是空，可以在控制面板-用户账户里面设置密码，建议设置密码。
+在开机后选择登陆用户界面时，按下Ctrl+Alt+Del，可以打开用户登陆框，输入administrator和密码(若无密码无须输入)即可进入administrator账户。</textarea>
+			<p> 正则表达式：<input type="text" name="" id="searchVal"> </p>
+
+
+		</form>
+		<button id="searchSubmit">搜索</button>
+		<div id="searchResult"></div>
+	</div>
+	<script type="text/javascript">
+		document.getElementById('searchVal').onkeyup = function(){
+			/*//获取模式  第一版
+			var pattern = document.getElementById('searchVal').value;
+			var re = new RegExp(pattern,'g');
+
+			//获取字符串
+			var searchString = document.getElementById('incoming').value;
+
+			//定义变量
+			var matchArray,first=0,last=0;resultString = '<pre>';
+
+			//开始匹配
+			while( (matchArray = re.exec(searchString)) != null ){
+				last = matchArray.index;
+
+				//获取匹配的字符串
+				resultString += searchString.substring(first,last);
+				//高亮显示
+				resultString += "<span class='found'>" + matchArray[0] + "</span>";
+
+				first = re.lastIndex;
+				
+
+				
+			}
+			resultString += searchString.substring(first,searchString.length);
+			resultString +="</pre>";
+			//插入到页面
+			document.getElementById('searchResult').innerHTML = resultString;*/
+
+
+			//第二版  按下键
+			var pattern = document.getElementById('searchVal').value;
+			
+			if( pattern.length < 1 ){
+				return;
+			}
+			var re = new RegExp(pattern,'g');
+
+			var searchString = document.getElementById('incoming').value;
+
+			var resultString = searchString.replace(re,"<span class='found'>$&</span>");
+
+			document.getElementById('searchResult').innerHTML = resultString;
+		};
+	</script>
+</body>
+</html>

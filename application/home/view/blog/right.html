@@ -1,0 +1,22 @@
+<div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+        <div class="sidebar-module sidebar-module-inset">
+        {blog:category catid='68'}
+            <h4>{$catename}</h4>
+            {$content|htmlspecialchars_decode}
+        {/blog:category}
+        </div>
+        <div class="sidebar-module">
+        <h4>博客归类</h4>
+        <ol class="list-unstyled">
+        {volist name="moth" id="m"}
+            <li><a href="/lists/date/{$m.date}.html">{$m['date']|strtodate=###}</a></li>
+        {/volist}
+        </ol>
+        </div>
+        <div class="sidebar-module">
+        <h4>Follow me</h4>
+        <ol class="list-unstyled">
+            <li><a target="_blank" href="https://github.com/TankCJZ">GitHub</a></li>
+        </ol>
+        </div>
+    </div><!-- /.blog-sidebar -->

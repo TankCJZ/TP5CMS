@@ -1,0 +1,205 @@
+{include file='public/header' title='网站首页-广告列表'}
+<link href="__PUBLIC__css/dataTables.bootstrap.css" rel="stylesheet">
+<style>
+    #adstables tbody>tr>td{
+        text-align: center;
+    }
+</style>
+<body>
+    <!-- 头部 -->
+    {include file="public/header_min"}
+    <!-- /头部 -->
+    <div class="main-container container-fluid">
+        <div class="page-container">
+            <!-- Page Sidebar -->
+            {include file="public/slidebar"}
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>    
+                            <i class="fa fa-home"></i>
+                            <a href="{url('Ads/index')}">广告管理</a>
+                        </li>
+                        <li class="active">广告列表</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Header -->
+                <div class="page-header position-relative">
+                    <div class="header-title">
+                        <h1>
+                            广告列表
+                        </h1>
+                    </div>
+                    <!--Header Buttons-->
+                    <div class="header-buttons">
+                        <a class="sidebar-toggler" href="#">
+                            <i class="fa fa-arrows-h"></i>
+                        </a>
+                        <a class="refresh" id="refresh-toggler" href="">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        <a class="fullscreen active" id="fullscreen-toggler" href="#">
+                            <i class="glyphicon glyphicon-fullscreen"></i>
+                        </a>
+                    </div>
+                    <!--Header Buttons End-->
+                </div>
+                <!-- /Page Header -->
+                <!-- Page Body -->
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12">
+                            <div class="widget">
+                                <div class="widget-header ">
+                                    <span class="widget-caption">广告列表</span>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="table-toolbar">
+                                        <div class="btn-group">
+                                            <a href="javascript:;" class="btn btn-default add-ads"><i class="fa fa-plus"></i>添加广告</a>
+                                        </div>
+                                        <div class="btn-group pull-right">
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-hover table-bordered" id="adstables">
+                                            <thead>
+                                                <tr role="row">
+                                                    <th class="col-xs-1 text-center">
+                                                        ID
+                                                    </th>
+                                                    <th class="col-xs-2 text-center">
+                                                        标题
+                                                    </th>
+                                                    <th class=" text-center">
+                                                        图片
+                                                    </th>
+                                                    <th class="col-xs-2 text-center">
+                                                        添加时间
+                                                    </th>
+                                                    <th class="col-xs-3 text-center">
+                                                        管理操作
+                                                    </th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <!-- /Page Body -->
+        </div>
+        <!-- /添加广告 model -->
+        <div id="addAdsModel" style="display:none;">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form class="form-horizontal" id="add-ads-form">
+                        <div class="form-group">
+                            <label for="title" class="col-sm-3 control-label text-center">标题</label>
+                            <div class="col-sm-8">
+                                <input value="" placeholder="必填" type="text" name="title" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="url" class="col-sm-3 control-label text-center">链接</label>
+                            <div class="col-sm-8">
+                                <input value="" placeholder="必填" type="text" name="url" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">图片</label>
+                            <div class="col-sm-8" style="padding-top:5px;">
+                                <label class="upload-label">
+                                    <!--<span class="upload-info"></span>-->
+                                    <img style="width:180px;height:60px;" src="" alt="" class="upload-img hide">
+                                    <input type="hidden" value="" name="img" class="upload-input">
+                                </label>
+                                <div class="upload-button">
+                                    <input type="file" name="_image" id="thumb" value="">
+                                    <span class="upload-icon"><i class="fa fa-plus-circle"></i>上传图片</span>
+                                </div>
+                                <a href="javascript:;" class="hide btn btn-danger upload-cancel">取消</a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="alt" class="col-sm-3 control-label text-center">alt属性</label>
+                            <div class="col-sm-8">
+                                <input value="" placeholder="必填" type="text" name="alt" class="form-control">
+                            </div>
+                        </div>
+                        <input type="hidden" name="ads_id" value="{$id}" class="ads_id">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success add-ads-btn">添加</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- /广告修改 model -->
+        <div id="editAdsModel" style="display:none;">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form class="form-horizontal" id="edit-ads-form">
+                        <div class="form-group">
+                            <label for="title" class="col-sm-3 control-label text-center">标题</label>
+                            <div class="col-sm-8">
+                                <input value="" placeholder="必填" type="text" name="title" class="form-control title">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="url" class="col-sm-3 control-label text-center">链接</label>
+                            <div class="col-sm-8">
+                                <input value="" placeholder="必填" type="text" name="url" class="form-control url">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">图片</label>
+                            <div class="col-sm-8" style="padding-top:5px;">
+                                <label class="upload-label">
+                                    <!--<span class="upload-info"></span>-->
+                                    <img style="width:180px;height:60px;" src="" alt="" class="upload-img hide">
+                                    <input type="hidden" value="" name="img" class="upload-input">
+                                </label>
+                                <div class="upload-button">
+                                    <input type="file" name="_image" id="thumb_edit" value="">
+                                    <span class="upload-icon"><i class="fa fa-plus-circle"></i>上传图片</span>
+                                </div>
+                                <a href="javascript:;" class="hide btn btn-danger upload-cancel">取消</a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="alt" class="col-sm-3 control-label text-center">alt属性</label>
+                            <div class="col-sm-8">
+                                <input value="" placeholder="必填" type="text" name="alt" class="form-control alt">
+                            </div>
+                        </div>
+                        <input type="hidden" name="id" id="id" value="">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success edit-ads-btn">修改</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    {include file='public/footer'}
+    <script src="__PUBLIC__js/datatable/jquery.dataTables.min.js"></script>
+    <script src="__PUBLIC__js/datatable/dataTables.bootstrap.min.js"></script>
+    <script src="__PUBLIC__js/common.js"></script>
+    <script src="__PUBLIC__js/adsList/adsList.tables.js"></script>
+</body>
+</html>

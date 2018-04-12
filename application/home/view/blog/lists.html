@@ -1,0 +1,45 @@
+{include file="blog/header"}
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 blog-main">
+          {if condition="isset($active_moth)"}
+          <div id="articleList" data-moth="{$active_moth}">
+          {else /}
+          <div id="articleList" data-catid="{$active}" >
+          {/if}
+         {volist name="article" id="a" length="1"}
+          <div class="blog-post">
+            <h2 class="blog-post-title"><a href="/article/{$a.id}.html">{$a.title}</a></h2>
+            <p class="blog-post-meta">这篇文章发布于 {$a.add_time|date="Y年m月d日 H:m",###}</p>
+            <p>{$a.description}</p>
+            <div class="blog-mread-more"><strong><a href="/article/{$a.id}">查看更多</a></strong></div>
+          </div>
+        {/volist}
+
+        {volist name="article" id="a" offset="1" length="4"}
+          <div class="blog-post">
+            <h2 class="blog-post-title">{$a.title}</h2>
+            <p class="blog-post-meta">这篇文章发布于 {$a.add_time|date="Y年m月d日 H:m",###}</p>
+            <p>{$a.description}</p>
+            <div class="blog-mread-more"><strong><a href="/article/{$a.id}.html">查看更多</a></strong></div>
+          </div>
+        {/volist}
+          </div>
+        {php}
+          if(count($article) > 5){
+        {/php}
+          <nav>
+            <ul class="pager">
+              <li><a href="javascript:;" class="btn prev">上一页</a></li>
+              <li><a href="javascript:;" data-page="1" class="btn next">下一页</a></li>
+            </ul>
+          </nav>
+        {php}
+          }
+        {/php}
+        </div>
+        {include file="blog/right"}
+      </div><!-- /.row -->
+    </div><!-- /.container -->
+    {include file="blog/footer"}
+    

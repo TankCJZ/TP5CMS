@@ -1,0 +1,276 @@
+{include file='public/header' title='网站首页-水印设置'}
+<body>
+    <!-- 头部 -->
+    {include file="public/header_min"}
+    <!-- /头部 -->
+    <div class="main-container container-fluid">
+        <div class="page-container">
+            <!-- Page Sidebar -->
+            {include file="public/slidebar"}
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="{url('Site/index')}">站点设置</a>
+                        </li>
+                        <li class="active">水印设置</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Header -->
+                <div class="page-header position-relative">
+                    <div class="header-title">
+                        <h1>
+                            水印设置
+                        </h1>
+                    </div>
+                    <!--Header Buttons-->
+                    <div class="header-buttons">
+                        <a class="sidebar-toggler" href="#">
+                            <i class="fa fa-arrows-h"></i>
+                        </a>
+                        <a class="refresh" id="refresh-toggler" href="">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        <a class="fullscreen active" id="fullscreen-toggler" href="#">
+                            <i class="glyphicon glyphicon-fullscreen"></i>
+                        </a>
+                    </div>
+                    <!--Header Buttons End-->
+                </div>
+                <!-- /Page Header -->
+                <!-- Page Body -->
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12">
+                            <div class="widget">
+                                <div class="widget-header ">
+                                    <span class="widget-caption">水印设置</span>
+                                </div>
+                                <div class="widget-body">
+                                    <form class="form-horizontal" role="form" id="set-vater-form">
+                                        <h5 class="row-title before-sky">水印基本设置</h5>
+                                        <div class="input-wrap">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label no-padding-right">是否启用</label>
+                                                <div class="col-sm-8">
+                                                    <div class="radio inline-block">
+                                                        <label>
+                                                            <input name="on" type="radio" class="checked" value="true" {$Think.config.vater.on==true?"checked":""}>
+                                                            <span class="text">启用</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio inline-block">
+                                                        <label>
+                                                            <input class="unchecked" name="on" type="radio" value="false" {$Think.config.vater.on==false?"checked":""}>
+                                                            <span class="text">禁用</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label no-padding-right">栏目图片添加水印</label>
+                                                <div class="col-sm-8">
+                                                    <div class="radio inline-block">
+                                                        <label>
+                                                            <input name="cate_on" type="radio" value="true" {$Think.config.vater.cate_on==true?"checked":""}>
+                                                            <span class="text">是</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio inline-block">
+                                                        <label>
+                                                            <input name="cate_on" type="radio" value="false" {$Think.config.vater.cate_on==false?"checked":""}>
+                                                            <span class="text">否</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label no-padding-right">文章缩略图添加水印</label>
+                                                <div class="col-sm-8">
+                                                    <div class="radio inline-block">
+                                                        <label>
+                                                            <input name="article_thumb_on" type="radio" value="true" {$Think.config.vater.article_thumb_on==true?"checked":""}>
+                                                            <span class="text">是</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio inline-block">
+                                                        <label>
+                                                            <input name="article_thumb_on" type="radio" value="false" {$Think.config.vater.article_thumb_on==false?"checked":""}>
+                                                            <span class="text">否</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label no-padding-right">文章内容图片添加水印</label>
+                                                <div class="col-sm-8">
+                                                    <div class="radio inline-block">
+                                                        <label>
+                                                            <input name="article_content_on" type="radio" value="true" {$Think.config.vater.article_content_on==true?"checked":""}>
+                                                            <span class="text">是</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio inline-block">
+                                                        <label>
+                                                            <input name="article_content_on" type="radio" value="false" {$Think.config.vater.article_content_on==false?"checked":""}>
+                                                            <span class="text">否</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group water-type">
+                                                <label class="col-sm-2 control-label no-padding-right">水印图类型</label>
+                                                <div class="col-sm-8">
+                                                    <div class="radio inline-block">
+                                                        <label>
+                                                            <input name="type" type="radio" class="img" value="1" {$Think.config.vater.type=='1'?"checked":""}>
+                                                            <span class="text">图片</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio inline-block">
+                                                        <label>
+                                                            <input class="font" name="type" type="radio" value="2" {$Think.config.vater.type=='2'?"checked":""}>
+                                                            <span class="text">文字</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="input-wrap type_img">
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label no-padding-right">水印图片路径</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" name="path" value="{$Think.config.vater.path}" class="form-control">
+                                                    </div>
+                                                    <p class="help-block col-sm-4"><span class="label label-success">水印图片放置的路径,建议使用png,gif格式</span></p>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label no-padding-right">透明度</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" name="alpha" value="{$Think.config.vater.alpha}" class="form-control">
+                                                    </div>
+                                                    <p class="help-block col-sm-4"><span class="label label-success">水印图透明度1-100</span></p>
+                                                </div>
+                                            </div>
+
+                                            <div class="input-wrap type_font">
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label no-padding-right">文字</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" name="fonttext" value="{$Think.config.vater.fonttext}" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label no-padding-right">字体文件</label>
+                                                    <div class="col-sm-6">
+                                                        <select name="fontttf" style="width: 100%;" id="fontttf">
+                                                        </select>
+                                                    </div>
+                                                    <p class="help-block col-sm-4"><span class="label label-success">可自行添加字体文件在./static/vater/ttf目录下</span></p>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label no-padding-right">字体大小</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" name="fontsize" value="{$Think.config.vater.fontsize}" class="form-control">
+                                                    </div>
+                                                    <p class="help-block col-sm-4"><span class="label label-success">填写数字即可</span></p>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label no-padding-right">字体颜色</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" name="fontcolor" value="{$Think.config.vater.fontcolor}" class="form-control">
+                                                    </div>
+                                                    <p class="help-block col-sm-4"><span class="label label-success">格式为#加六位数字</span></p>
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label no-padding-right">位置偏移度</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" name="offset" value="{$Think.config.vater.offset}" class="form-control">
+                                                    </div>
+                                                    <p class="help-block col-sm-4"><span class="label label-success">相对当前位置的偏移度</span></p>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label no-padding-right">字体倾斜度</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" name="angle" value="{$Think.config.vater.angle}" class="form-control">
+                                                    </div>
+                                                    <p class="help-block col-sm-4"><span class="label label-success">0-360</span></p>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                    <label class="col-sm-2 control-label no-padding-right">水印位置</label>
+                                                    <div class="col-sm-8">
+                                                        <label>
+                                                            <input class="unchecked" name="position" type="radio" value="1" {$Think.config.vater.position=='1'?"checked":""}>
+                                                            <span class="text">左上</span>
+                                                        </label>
+                                                        <label>
+                                                            <input class="unchecked" name="position" type="radio" value="2" {$Think.config.vater.position=='2'?"checked":""}>
+                                                            <span class="text">上中</span>
+                                                        </label>
+                                                        <label>
+                                                            <input class="unchecked" name="position" type="radio" value="3" {$Think.config.vater.position=='3'?"checked":""}>
+                                                            <span class="text">右上</span>
+                                                        </label>
+                                                        <br>
+                                                        <label>
+                                                            <input class="unchecked" name="position" type="radio" value="4" {$Think.config.vater.position=='4'?"checked":""}>
+                                                            <span class="text">左中</span>
+                                                        </label>
+                                                        <label>
+                                                            <input class="unchecked" name="position" type="radio" value="5" {$Think.config.vater.position=='5'?"checked":""}>
+                                                            <span class="text">正中</span>
+                                                        </label>
+                                                        <label>
+                                                            <input class="unchecked" name="position" type="radio" value="6" {$Think.config.vater.position=='6'?"checked":""}>
+                                                            <span class="text">右中</span>
+                                                        </label>
+                                                        <br>
+                                                        <label>
+                                                            <input class="unchecked" name="position" type="radio" value="7" {$Think.config.vater.position=='7'?"checked":""}>
+                                                            <span class="text">左下</span>
+                                                        </label>
+                                                        <label>
+                                                            <input class="unchecked" name="position" type="radio" value="8" {$Think.config.vater.position=='8'?"checked":""}>
+                                                            <span class="text">下中</span>
+                                                        </label>
+                                                        <label>
+                                                            <input class="unchecked" name="position" type="radio" value="9" {$Think.config.vater.position=='9'?"checked":""}>
+                                                            <span class="text">右下</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <button type="submit" class="btn btn-success btn-set-vater">保存设置</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <!-- /Page Body -->
+        </div>
+        <!-- /Page Content -->
+    </div>
+    </div>
+    {include file='public/footer'}
+    <script src="__PUBLIC__js/setup/vater.js"></script>
+</body>
+</html>

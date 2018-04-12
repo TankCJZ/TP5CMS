@@ -1,0 +1,162 @@
+{include file='public/header' title='网站首页-会员组列表'}
+<link href="__PUBLIC__css/dataTables.bootstrap.css" rel="stylesheet">
+<style>
+    #adstables tbody>tr>td{
+        text-align: center;
+    }
+</style>
+<body>
+    <!-- 头部 -->
+    {include file="public/header_min"}
+    <!-- /头部 -->
+    <div class="main-container container-fluid">
+        <div class="page-container">
+            <!-- Page Sidebar -->
+            {include file="public/slidebar"}
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="{url('Member/index')}">会员管理</a>
+                        </li>
+                        <li class="active">会员组列表</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Header -->
+                <div class="page-header position-relative">
+                    <div class="header-title">
+                        <h1>
+                            会员组列表
+                        </h1>
+                    </div>
+                    <!--Header Buttons-->
+                    <div class="header-buttons">
+                        <a class="sidebar-toggler" href="#">
+                            <i class="fa fa-arrows-h"></i>
+                        </a>
+                        <a class="refresh" id="refresh-toggler" href="">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        <a class="fullscreen active" id="fullscreen-toggler" href="#">
+                            <i class="glyphicon glyphicon-fullscreen"></i>
+                        </a>
+                    </div>
+                    <!--Header Buttons End-->
+                </div>
+                <!-- /Page Header -->
+                <!-- Page Body -->
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12">
+                            <div class="widget">
+                                <div class="widget-header ">
+                                    <span class="widget-caption">会员组列表</span>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="table-toolbar">
+                                        <div class="btn-group">
+                                            <a href="javascript:;" class="btn btn-default add-group"><i class="fa fa-plus"></i>添加会员组</a>
+                                        </div>
+                                        <div class="btn-group pull-right">
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-hover table-bordered" id="adstables">
+                                            <thead>
+                                                <tr role="row">
+                                                    <th class="col-xs-1 text-center">
+                                                        ID
+                                                    </th>
+                                                    <th class="col-xs-3 text-center">
+                                                        组名称
+                                                    </th>
+                                                    <th class="col-xs-3 text-center">
+                                                        组描述
+                                                    </th>
+                                                    <th class="col-xs-1 text-center">
+                                                        会员数
+                                                    </th>
+                                                    <th class="col-xs-2 text-center">
+                                                        状态
+                                                    </th>
+                                                    <th class="col-xs-2 text-center">
+                                                        操作
+                                                    </th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <!-- /Page Body -->
+        </div>
+        <!-- /添加会员组 model -->
+        <div id="addGroupModel" style="display:none;">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form class="form-horizontal" id="add-group-form">
+                        <div class="form-group">
+                            <label for="name" class="col-sm-3 control-label text-center">名称</label>
+                            <div class="col-sm-8">
+                                <input value="" placeholder="必填" type="text" name="name" class="form-control name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="desc" class="col-sm-3 control-label text-center">描述</label>
+                            <div class="col-sm-8">
+                                <textarea name="description" placeholder="可留空" class="form-control description "></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success add-group-btn">添加</button>
+                </div>
+            </div>
+        </div>
+        <!-- /修改会员组 model -->
+        <div id="editGroupModel" style="display:none;">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form class="form-horizontal" id="edit-group-form">
+                        <div class="form-group">
+                            <label for="name" class="col-sm-3 control-label text-center">名称</label>
+                            <div class="col-sm-8">
+                                <input value="" placeholder="必填" type="text" name="name" class="form-control name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="desc" class="col-sm-3 control-label text-center">描述</label>
+                            <div class="col-sm-8">
+                                <textarea name="description" placeholder="可留空" class="form-control description "></textarea>
+                            </div>
+                        </div>
+                        <input type="hidden" name="id" value="" class="id">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success edit-group-btn">修改</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    {include file='public/footer'}
+    <script src="__PUBLIC__js/datatable/jquery.dataTables.min.js"></script>
+    <script src="__PUBLIC__js/datatable/dataTables.bootstrap.min.js"></script>
+    <script src="__PUBLIC__js/common.js"></script>
+    <script src="__PUBLIC__js/member/group.tables.js"></script>
+</body>
+</html>

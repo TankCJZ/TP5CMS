@@ -1,0 +1,417 @@
+﻿1.调用当前栏目下的所有子栏目的文章列表（文件模型）：
+  <div class="biaoge">
+        <ul>
+     {pc:content action="category" num="8" catid="55" siteid="$siteid" order="listorder ASC"}
+        {loop $data $v}
+               <li class="b-warp">
+                <div class="b-title"><span>{$v['catname']}</span>
+                  <i class="iconfont">&#xe601;</i>
+                </div>
+              {pc:content  action="lists" catid="$v['catid']" order="id DESC" num="20" moreinfo="1" return="subcate"}
+                <div class="b-li">
+                  <ul>
+              {if $subcate}
+                {loop $subcate $r}
+                {php $xiazai = string2array($r['downfiles']);}
+                {loop $xiazai $b}
+                    <li><a href="{$b['fileurl']}">{$b['filename']}</a></li>
+                {/loop}
+                {/loop}
+                  </ul>
+              {/if}
+                </div>
+              {/pc}
+              </li>
+        </ul>
+        {/loop}
+    {/pc}
+</div>  
+
+
+phpcms v9导航栏调用二级栏目实例教程
+<div>
+  <ul>
+    <li><a href="{siteurl($siteid)}">首页</a></li>
+    {pc:content action="category" catid="0" num="10" siteid="$siteid" order="listorder ASC"}
+    {loop $data $r}
+    <li><a href="{$r[url]}">{$r[catname]}</a>
+      {if $r[arrchildid]}
+      <ul>
+        {pc:content action="category" catid="$r[catid]" num="10" siteid="$siteid" order="listorder ASC" return="data2"}
+        {loop $data2 $v}
+        <li><a href="{$v[url]}">{$v[catname]}</a></li>
+        {/loop}
+        {/pc}
+      </ul>
+      {/if}
+    </li>
+    {/loop}
+    {/pc}
+  </ul>
+</div>  
+
+
+2.判断个数的使用：
+{if $n!=1}rel="nofollow"{/if}
+
+//调用首页推荐文章
+{pc:content  action="position" posid="2" catid="2" order="id DESC" num="4"}
+ <ul>
+ {loop $data $key $val}
+ <li> <a href="{$val['url']}">{$val['title']}</a></li>
+ {/loop}
+ </ul>
+ {/pc}
+
+
+3.调用单网页：
+{pc:get sql="SELECT * FROM v9_page where catid=单网页ID号"} 
+	{loop $data  $val} 
+		<a href="{$val['url']}" title="{$val['title']}">{str_cut(strip_tags($val[content]),860,"...")}</a> 
+	{/loop} 
+{/pc}
+
+
+
+4.调用首页：
+<a href="{siteurl($siteid)}/">网站首页</a>
+
+
+
+5.列表循环：
+{pc:content action="lists" catid="$catid" num="25" order="listorder ASC" page="$page"}
+        <ul class="list lh24 f14">
+{loop $data $r}
+	<li><span class="rt">{date('Y-m-d H:i:s',$r[inputtime])}</span>·<a href="{$r[url]}" target="_blank"{title_style($r[style])}>{$r[title]}</a></li>
+	{if $n%5==0}<li class="bk20 hr"></li>{/if}
+{/loop}
+        </ul>
+        <div id="pages" class="text-c">{$pages}</div>
+{/pc}
+
+
+6.8.指定栏目引用
+URL ：{$CATEGORYS[catid][url]}  栏目名称：{$CATEGORYS[catid][catname]}
+
+
+
+8.列表循环时调用文章内容：
+ {pc:content action="lists" catid="$catid" num="1" order="id DESC" moreinfo="1"}
+      {loop $data $key $val}
+          <div class="zx_lil">
+             <div class="zx_lill">
+               <div class="zx_cimg" id="hxslg"><a></a></div>
+                 <div class="zx_catc">
+                     <h2>{str_cut($val[title],'50','')}</h2>
+                      <p>{str_cut($val[description],'40','')}</p>
+                      <p>
+                        {str_cut(strip_tags($val['content']),'40','')}
+                      </p>
+                      <p><a href="{$val[url]}">更多&gt;&gt;</a></p>
+                 </div>
+              </div>
+          </div>
+      {/loop}
+  {/pc}
+
+
+
+
+9.自定义表单-添加验证码：
+
+
+1.在 \phpcms\templates\default\formguide\show.html 中添加验证码显示
+    <input type="text" id="code" name="code" size="8" class="input-text">{form::checkcode('code_img', '4', '14', 84, 24)}
+
+
+
+2.在phpcms\modules\formguide\index.php
+第三行下面添加
+$session_storage = 'session_'.pc_base::load_config('system','session_storage');
+pc_base::load_sys_class($session_storage);
+ 
+		定位
+                if (isset($_POST['dosubmit'])) {
+                        $tablename = 'form_'.$r['tablename'];
+                        $this->m_db->change_table($tablename);
+ 
+		下面添加
+ 
+        	if(!empty($_SESSION['code'])) {
+    //判断验证码
+    $code = isset($_POST['code']) && trim($_POST['code']) ? trim($_POST['code']) : showmessage(L('input_code'), HTTP_REFERER);
+    if ($_SESSION['code'] != strtolower($code)) {
+     showmessage(L('code_error'), HTTP_REFERER);
+    }
+   }
+留言后返回上一页：
+文件地址：phpcms\modules\formguide\index.php
+原始代码：
+showmessage(L('thanks'), APP_PATH);
+HTTP_REFERER 是页面来源的意思，也就是从哪里来回哪里去~~
+showmessage(L('thanks'), HTTP_REFERER);
+
+
+
+
+10.搜索功能调用：
+<form action="{APP_PATH}index.php" method="GET">
+	<div class="height90 ftsize30 posi_relative">
+		<input type="hidden" name="m" value="search"/>
+		<input type="hidden" name="c" value="index"/>
+		<input type="hidden" name="a" value="init"/>
+		<input type="hidden" name="typeid" value="{$typeid}" id="typeid"/>
+		<input type="hidden" name="siteid" value="{$siteid}" id="siteid"/>
+		<input type="" name="q" id="q" value="" class="ipt_gjc"  placeholder="输入关键词"/> <img src="{IMG_PATH}hxssy/index_03.png" class="img1" />
+	</div>
+</form>
+
+
+
+10.1列表显示：
+{pc:get sql="SELECT * FROM `v9_news` where title like '%$q%' order by id DESC" num="5" page="$page" return="data"}
+		{if $data==""}
+		<p style="text-align:center; font-size:16px; ">没有找到和<font color="#FF0000;" style="text-decoration:underline; font-weight:bold; " >{$q}</font>相关的文章，请减短关键词或换个词组！</p>
+		{/if}
+		<div class="hot_l" style="float:none;margin:0 auto;">
+			{loop $data $val}
+			<div class="hot_li {if $n>1&&$n<5}hbd{/if} {if $n==4}no_bb{/if}">
+				<div class="hot_lict">
+					<div class="ct_img" style="background: url('{$val[thumb]}') 0 0 no-repeat;"></div>
+					<div class="ct_dit">
+						<h1>{str_cut($val[title],'50','')}</h1>
+						<p>{str_cut($val[description],'40','')}<br/>
+							{str_cut(strip_tags($val['content']),'70','')}
+						</p>
+						<p><a href="{$val[url]}">更多&gt;&gt;</a></p>
+					</div>
+				</div>
+			</div>
+			{/loop}
+			<p style="text-align: center;font-size: 14px;line-height: 20px;padding-top: 10px;">{$pages}</p>
+		</div>
+		{/pc}
+
+
+
+
+11.关键字，描述，标题
+<title>{if isset($SEO['title']) && !empty($SEO['title'])}{$SEO['title']}{/if}{$SEO['site_title']}</title>
+<meta name="keywords" content="{$SEO['keyword']}">
+<meta name="description" content="{$SEO['description']}">
+
+
+
+
+12.位置显示
+<span>当前位置：</span><a href="{siteurl($siteid)}">首页</a> > {catpos($catid)}
+
+
+
+13.上下篇
+<p class="pre">上一篇：<a href="{$previous_page[url]}">{$previous_page[title]}</a><a href="javascript:window.history.go(-1);" class="back r">返回</a></p>
+<p class="next">下一篇：<a href="{$next_page[url]}">{$next_page[title]}</a></p>
+
+14.当前栏目调用父栏目Id
+{if $catid==$r[catid] || $r[catid]==$CATEGORYS[$catid][parentid] }class="active"{/if}
+
+
+14.下载模型的使用
+{pc:content action= lists  catid= 36  num= 15  order= id DESC  page= $page  moreinfo= 1 }
+
+{loop $data $r}
+
+  {php $xiazai = string2array($r[ downfiles ]);}
+
+  {loop $xiazai $b}
+
+    ..循环内容...
+
+   文件地址调用标签：{$b[fileurl]}    文件名调用标签：{$b[filename]}
+
+{/loop}
+
+{/loop}
+
+{/pc}
+
+//广告调用
+{pc:content  action="ads" spaceid="9" order="listorder ASC" num="5"}
+{loop $data $r}
+        <li><a class="item" href="{$r['url']}" title="{$r['alt']}" target="_blank"><img class="bg" src="{$r['imageurl']}" alt="{$r['alt']}" /></a></li>
+{/loop}
+{/pc}
+
+
+16.二级栏目导航
+{pc:content action="category" catid="0" num="20" siteid="$siteid" order="listorder ASC"}
+    {loop $data $r}
+	<li>
+		<a href="{$r[url]}">{$r[catname]}</a>
+		{if $r[arrchildid]}
+		<div class="sub hide" id="sub">
+			<ul>
+			{pc:content action="category" catid="$r[catid]" num="10" siteid="$siteid" order="listorder ASC" return="data2"}
+				{loop $data2 $v}
+					<li>
+					<a href="{$v[url]}">{$v[catname]}</a>
+					</li>
+				{/loop}
+			{/pc}
+			</ul>
+		</div>
+		{/if}
+	</li>
+	{/loop}
+{/pc}
+
+phpcmsv9调用文字友情链接
+
+{pc:link action="type_list" typeid="53" siteid="$siteid" order="listorder DESC" num="10" return="dat"}
+{loop $dat $v}
+<a href="{$v[url]}" target="_blank">{$v[name]}</a> |
+{/loop}
+{/pc}
+
+phpcmsv9调用图片友情链接
+
+{pc:link  action="type_list" typeid="53" siteid="$siteid" linktype="1" order="listorder DESC" num="8" return="pic_link"}
+{loop $pic_link $v}
+<li><a href="{$v['url']}" title="{$v['name']}" target="_blank"><img src="{$v[logo]}" width="88" height="31" /></a></li>
+{/loop}
+{/pc}
+
+
+
+
+
+17.二级栏目导航并显示栏目下的列表信息
+{pc:content action="category" catid="$catid" num="20" siteid="$siteid" order="listorder ASC"}	
+	{loop $data $r}
+		<div class="video_list">
+			<div class="h3">
+				<h3>{$r[catname]}</h3>
+			</div>
+			{if $r[arrchildid]}
+				<ul>
+					{pc:content action="lists" catid="$r[catid]" num="20" order="listorder ASC" return="data2"}
+						{loop $data2 $v}
+							<li>
+								<a href="{$v[url]}">{$v[title]}</a>
+							</li>
+						{/loop}
+					{/pc}
+				</ul>
+			{/if}
+		</div>	
+					
+	{/loop}
+{/pc}
+18.
+
+
+
+
+18.首页头部调用二级栏目：
+{pc:content action="category" catid="0" num="20" siteid="$siteid" order="listorder ASC"}
+    				{loop $data $r}
+						<li>
+							<a {if $r[catid]==8}target="_blank"{/if} href="{$r[url]}">{$r[catname]}</a>
+							{if $r[arrchildid]}
+							<div class="sub hide" id="sub">
+								<ul>
+									{pc:content action="category" catid="$r[catid]" num="10" siteid="$siteid" order="listorder ASC" return="data2"}
+										{loop $data2 $v}
+									<li>
+										<a href="{$v[url]}">{$v[catname]}</a>
+									</li>
+										{/loop}
+									{/pc}
+								</ul>
+							</div>
+							{/if}
+						</li>
+					{/loop}
+				{/pc}
+
+
+19.内容页面调用点击量
+<span id="hits"></span>
+<script src="{APP_PATH}api.php?op=count&id={$id}&modelid={$modelid}"></script>	
+
+20.phpcms默认发布时间标签为：{$inputtime}，显示时间格式为：2015-01-04 22:22:22
+修改后标签为：{date('Y-m-d',strtotime($inputtime))} 显示时间格式为：2015-01-04
+
+21.{if $catid==$r[catid] || $r[catid]==$CATEGORYS[$catid][parentid] }class="selected"{/if} 	
+
+22.首页调用单页的内容
+{pc:get sql="SELECT * FROM v9_page where catid=4"}
+{loop $data $key $val}
+	{$val[content]}
+	{/loop}
+{/pc}	
+
+
+23.自定义分页设置
+打开phpcms\libs\functions\global.func.php
+
+找到里面 * 分页函数 这一段
+$multipage .= '<a class="a1">'.$num.L('page_item').'</a>';
+这个是默认的 ，可以修改如下格式
+$multipage .= '<a href="#">当前第'.$curr_page.'页</a><a  href="#">共'.$pages.'页</a><a  href="#">共'.$num.L('page_item').'</a>';
+即可
+显示如下
+
+调用组图：
+{loop $thumbs $r} 
+<div class="col-1-3 mobile-col-1-1">
+	<div class="thumb">
+		<a href="javascript:;">
+			<img alt="{$r[alt]}" src="{$r[url]}#" class="response-img" />
+		</a>
+	</div>
+	<div class="title">
+		<a href="javascript:;">{$r[alt]}</a>
+	</div>
+	</div>
+{/loop}
+
+
+
+下载：
+<li>
+{php $xiazai = string2array($r['downfiles']);}
+	{loop $xiazai $b}
+		<a href="{$b[fileurl]}">点击进入下载</a>
+	{/loop}
+		</div>
+	</li>
+{/loop}
+
+广告调用标签
+{pc:content action="ads" spaceid="11" order="listorder ASC" num="1"}
+	{loop $data $r}
+		<img alt="{$r['alt']}" src="{$r['imageurl']}" class="img-responsive logo" />
+	{/loop}
+{/pc}
+推荐调用
+{pc:content  action="position" posid="2" order="listorder DESC" num="4"}
+ <ul>
+ {loop $data $key $val}
+ <li> <a href="{$val['url']}">{$val['title']}</a></li>
+ {/loop}
+ </ul>
+ {/pc}
+
+站点网址调用
+{siteurl($siteid)}
+
+页面跳转
+<?php
+	if($catid == 5){
+		header("Location:/index.php?m=content&c=index&a=lists&catid=21");
+	}	
+?>
+
+增加文章点击量
+<script type="text/javascript" src="addNewsHits.php?id={$id}"></script>

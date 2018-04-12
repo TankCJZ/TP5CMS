@@ -1,0 +1,114 @@
+{include file='public/header' title='网站首页-修改密码'}
+
+<body>
+    <!-- 头部 -->
+    {include file="public/header_min"}
+    <!-- /头部 -->
+    <div class="main-container container-fluid">
+        <div class="page-container">
+            <!-- Page Sidebar -->
+            {include file="public/slidebar"}
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="#">管理员</a>
+                        </li>
+                        <li class="active">修改资料</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Header -->
+                <div class="page-header position-relative">
+                    <div class="header-title">
+                        <h1>
+                            修改资料
+                        </h1>
+                    </div>
+                    <!--Header Buttons-->
+                    <div class="header-buttons">
+                        <a class="sidebar-toggler" href="#">
+                            <i class="fa fa-arrows-h"></i>
+                        </a>
+                        <a class="refresh" id="refresh-toggler" href="">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        <a class="fullscreen active" id="fullscreen-toggler" href="#">
+                            <i class="glyphicon glyphicon-fullscreen"></i>
+                        </a>
+                    </div>
+                    <!--Header Buttons End-->
+                </div>
+                <!-- /Page Header -->
+                <!-- Page Body -->
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <div class="widget">
+                                <div class="widget-header bordered-bottom bordered-green">
+                                    <span class="widget-caption">修改密码</span>
+                                </div>
+                                <div class="widget-body">
+                                    <div id="horizontal-form">
+                                        <form class="form-horizontal" id="edit-form" action="#">
+                                            <div class="form-group">
+                                                <label for="" class="col-sm-2 control-label no-padding-right">用户名</label>
+                                                <div class="col-sm-4">
+                                                    <input id="username" class="form-control" disabled="disabled" value="{$user.username}" type="text">
+                                                    <input type="hidden" name="username" value="{$user.username}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="password" class="col-sm-2 control-label no-padding-right">旧密码</label>
+                                                <div class="col-sm-4">
+                                                    <input id="oldpassword" value="" require class="form-control" placeholder="" name="oldpassword" type="password">
+                                                </div>
+                                                <p class="help-block col-sm-4 red">* 必填</p>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="password" class="col-sm-2 control-label no-padding-right">新密码</label>
+                                                <div class="col-sm-4">
+                                                    <input id="password" value="" require class="form-control" placeholder="" name="password" type="password">
+                                                </div>
+                                                <p class="help-block col-sm-4 red">* 必填</p>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="password" class="col-sm-2 control-label no-padding-right">确认密码</label>
+                                                <div class="col-sm-4">
+                                                    <input id="repassword" value="" require class="form-control" placeholder="" name="repassword" type="password">
+                                                </div>
+                                                <p class="help-block col-sm-4 red">* 必填</p>
+                                            </div>
+
+                                            <input id="id" name="id" value="{$user.id}" type="hidden">
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <button type="submit" class="btn btn-default submit-btn">修改资料</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Page Body -->
+        </div>
+        <!-- /Page Content -->
+    </div>
+    </div>
+    {include file='public/footer'}
+    <script src="__PUBLIC__js/admin.js"></script>
+</body>
+
+</html>

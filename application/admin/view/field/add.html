@@ -1,0 +1,132 @@
+{include file='public/header' title='网站首页-模型管理-字段列表'}
+<body>
+    <!-- 头部 -->
+    {include file="public/header_min"}
+    <!-- /头部 -->
+    <div class="main-container container-fluid">
+        <div class="page-container">
+            <!-- Page Sidebar -->
+            {include file="public/slidebar"}
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="{url('Field/index')}">字段管理</a>
+                        </li>
+                        <li class="active">添加字段</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Header -->
+                <div class="page-header position-relative">
+                    <div class="header-title">
+                        <h1>
+                            添加字段
+                        </h1>
+                    </div>
+                    <!--Header Buttons-->
+                    <div class="header-buttons">
+                        <a class="sidebar-toggler" href="#">
+                            <i class="fa fa-arrows-h"></i>
+                        </a>
+                        <a class="refresh" id="refresh-toggler" href="">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        <a class="fullscreen active" id="fullscreen-toggler" href="#">
+                            <i class="glyphicon glyphicon-fullscreen"></i>
+                        </a>
+                    </div>
+                    <!--Header Buttons End-->
+                </div>
+                <!-- /Page Header -->
+                <!-- Page Body -->
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <div class="widget">
+                                <div class="widget-header bordered-bottom bordered-green">
+                                    <span class="widget-caption">添加字段</span>
+                                </div>
+                                <div class="widget-body">
+                                    <div>
+                                        <form class="form-horizontal" action="/admin/field/add" id="field-add-form" method="post">
+                                            <div class="form-group">
+                                                <label for="datatype" class="col-sm-1 control-label no-padding-right">字段类型</label>
+                                                <div class="col-sm-4">
+                                                    <select name="datatype" style="width: 100%;">
+                                                        <option value="string">单行文本</option>
+                                                        <option value="strings">多行文本</option>
+                                                        <option value="int">数字</option>
+                                                        <option value="time">时间</option>
+                                                        <option value="editor">编辑框</option>
+                                                        <option value="radio">单选框</option>
+                                                        <option value="image">单图片</option>
+                                                        <option value="images">多图片</option>
+                                                        <option value="file">单文件</option>
+                                                        <option value="files">多文件</option>
+                                                    </select>
+                                                </div>
+                                                <p class="help-block col-sm-7 red"><span class="label label-info">* 必选（数据字段类型）</span></p>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="name" class="col-sm-1 control-label no-padding-right">字段名</label>
+                                                <div class="col-sm-4">
+                                                    <input id="name" require class="form-control" placeholder="" name="name" value="" type="text">
+                                                </div>
+                                                <p class="help-block col-sm-7 red"><span class="label label-info">* 必填（为数据表字段名 如：title）</span></p>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="fieldname" class="col-sm-1 control-label no-padding-right">字段别名</label>
+                                                <div class="col-sm-4">
+                                                    <input id="fieldname" require class="form-control" placeholder="" name="fieldname" value="" type="text">
+                                                </div>
+                                                <p class="help-block col-sm-7 red"><span class="label label-info">* 必填（如：标题）</span></p>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="prom" class="col-sm-1 control-label no-padding-right">提示信息</label>
+                                                <div class="col-sm-4">
+                                                    <input id="prom" require class="form-control" placeholder="" name="prom" value="" type="text">
+                                                </div>
+                                                <p class="help-block col-sm-7 red"><span class="label label-info">* 可留空（提示信息!）</span></p>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="sort" class="col-sm-1 control-label no-padding-right">排序</label>
+                                                <div class="col-sm-4">
+                                                    <input id="sort" require class="form-control" placeholder="" name="sort" value="100" type="number">
+                                                </div>
+                                                <p class="help-block col-sm-4 red"></p>
+                                            </div>
+                                            <input type="hidden" name="modelid" value="{$modelid}">
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-1 col-sm-10">
+                                                    <button type="submit" class="btn btn-default field-add">添加字段</button>
+                                                    <a href="javascript:window.history.go(-1);" class="btn btn-primary cate-add">返回字段管理</a>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Page Body -->
+        </div>
+        <!-- /Page Content -->
+    </div>
+    </div>
+    {include file='public/footer'}
+    <script src="__PUBLIC__js/common.js"></script>
+    <script src="__PUBLIC__js/model-field.js"></script>
+</body>
+</html>

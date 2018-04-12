@@ -1,0 +1,196 @@
+{include file='public/header' title='网站首页-修改栏目'}
+
+<body>
+    <!-- 头部 -->
+    {include file="public/header_min"}
+    <!-- /头部 -->
+    <div class="main-container container-fluid">
+        <div class="page-container">
+            <!-- Page Sidebar -->
+            {include file="public/slidebar"}
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="{url('Category/index')}">栏目管理</a>
+                        </li>
+                        <li class="active">修改栏目</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Header -->
+                <div class="page-header position-relative">
+                    <div class="header-title">
+                        <h1>
+                            修改栏目
+                        </h1>
+                    </div>
+                    <!--Header Buttons-->
+                    <div class="header-buttons">
+                        <a class="sidebar-toggler" href="#">
+                            <i class="fa fa-arrows-h"></i>
+                        </a>
+                        <a class="refresh" id="refresh-toggler" href="">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        <a class="fullscreen active" id="fullscreen-toggler" href="#">
+                            <i class="glyphicon glyphicon-fullscreen"></i>
+                        </a>
+                    </div>
+                    <!--Header Buttons End-->
+                </div>
+                <!-- /Page Header -->
+                <!-- Page Body -->
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <div class="widget">
+                                <div class="widget-header bordered-bottom bordered-green">
+                                    <span class="widget-caption">修改栏目</span>
+                                </div>
+                                <div class="widget-body">
+                                    <div>
+                                        <form class="form-horizontal" action="/admin/category/edit" method="post" id="cate-edit-form">
+                                            <div class="form-group">
+                                                <label for="pid" class="col-sm-1 control-label no-padding-right">上级栏目</label>
+                                                <div class="col-sm-6">
+                                                    <select name="pid" style="width: 100%;">
+                                                        <option value="0">==作为一级栏目==</option>
+                                                        {volist name="cates" id="c"}
+                                                        <option value="{$c.id}" {$c.id==$cate.pid?'selected="selected"':''}>{$c.html}{$c.catename}</option>
+                                                        {/volist}
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group cate-model">
+                                                <label for="pid" class="col-sm-1 control-label no-padding-right">栏目模型</label>
+                                                <div class="col-sm-6">
+                                                    <select name="modelid" style="width: 100%;" disabled="disabled">
+                                                        <option value="">==请选择模型==</option>
+                                                        {volist name="mode" id="c"}
+                                                        <option value="{$c.id}" {$c.id==$cate.modelid?'selected="selected"':''}>{$c.name}</option>
+                                                        {/volist}
+                                                    </select>
+                                                </div>
+                                                <p class="help-block col-sm-5"><span class="label label-info">选择后不能修改!</span></p>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="catename" class="col-sm-1 control-label no-padding-right">栏目名称</label>
+                                                <div class="col-sm-6">
+                                                    <input id="catename" require class="form-control" name="catename" value="{$cate.catename}" type="text">
+                                                </div>
+                                                <p class="help-block col-sm-5"><span class="label label-info">必填项!</span></p>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="type" class="col-sm-1 control-label no-padding-right">栏目类型</label>
+                                                <div class="col-sm-6 type">
+                                                    <div class="radio inline-block">
+                                                        <label>
+                                                            <input name="type" value="1" type="radio" {$cate.type=='栏目'?'checked="checked"':'disabled="disabled"'}>
+                                                            <span class="text">栏目</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio inline-block">
+                                                        <label>
+                                                            <input name="type" value="2" type="radio" {$cate.type=='单篇'?'checked="checked"':'disabled="disabled"'}>
+                                                            <span class="text">单篇</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio inline-block">
+                                                        <label>
+                                                            <input name="type" value="3" type="radio" {$cate.type=='链接'?'checked="checked"':'disabled="disabled"'}>
+                                                            <span class="text">链接</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <p class="help-block col-sm-5"><span class="label label-info">选择后不能修改!</span></p>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="thumb" class="val-middle col-sm-1 control-label no-padding-right">缩略图</label>
+                                                
+                                                <div class="col-sm-6" style="padding-top:5px;">
+                                                    <label class="upload-label">
+                                                        <span class="upload-info {$cate.thumb?'show':''}">{$cate.thumb}</span>
+                                                        <input type="hidden" value="{$cate.thumb}" name="thumb" class="upload-input">
+                                                    </label>
+                                                    <div class="upload-button">
+                                                        <input type="file" name="_image" id="thumb" value="">
+                                                        <span class="upload-icon"><i class="fa fa-plus-circle"></i>上传图片</span>
+                                                    </div>
+                                                    <a href="javascript:;" class="{$cate.thumb?'':'hide'} btn btn-danger upload-cancel">取消</a>
+                                                </div>
+                                                <p class="help-block col-sm-5"><span class="label label-info">栏目缩略图!</span></p>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="description" class="col-sm-1 control-label no-padding-right">描述</label>
+                                                <div class="col-sm-6">
+                                                    <textarea name="description" class="form-control" rows="6" id="form-field-8" placeholder="描述">{$cate.description}</textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group content" style="display:none;">
+                                                <label for="description" class="col-sm-1 control-label no-padding-right">内容</label>
+                                                <div class="col-sm-10">
+                                                     <textarea name="content" id="summernote" >{$cate.content}</textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group url" style="display:none;">
+                                                <label for="url" class="col-sm-1 control-label no-padding-right">链接地址</label>
+                                                <div class="col-sm-6">
+                                                     <input id="url" class="form-control" placeholder="" name="url" value="{$cate.url}" type="url">
+                                                </div>
+                                                <p class="help-block col-sm-5"><span class="label label-info">必填项!</span></p>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="sort" class="col-sm-1 control-label no-padding-right">排序</label>
+                                                <div class="col-sm-6">
+                                                    <input id="sort" class="form-control" placeholder="" name="sort" value="{$cate.sort}" type="text">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group status">
+                                                <label for="sort" class="col-sm-1 control-label no-padding-right">显示</label>
+                                                <div class="col-sm-6" style="padding-top:6px;">
+                                                    <label>
+                                                        <input name="status" value="{$cate.status}" class="checkbox-slider" type="checkbox" {$cate.status=='1'?'checked="checked"':''}>
+                                                        <span class="text"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="id" value="{$cate.id}">
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-1 col-sm-10">
+                                                    <button type="submit" class="btn btn-default cate-edit">修改栏目</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Page Body -->
+        </div>
+        <!-- /Page Content -->
+    </div>
+    </div>
+    {include file='public/footer'}
+    <script src="__PUBLIC__js/summernote/summernote.js"></script>
+    <script src="__PUBLIC__js/category/category.js"></script>
+    <script src="__PUBLIC__js/summernote/init.js"></script>
+</body>
+</html>
