@@ -17,7 +17,7 @@ TP5CMS，一个基于ThinkPHP5.1版本开发内容管理系统,扁平化自适�
 ### 使用须知
 
 > 运行环境要求PHP5.6+
-> 需要在application 目录下添加database.php数据配置文件，并导入数据库
+> 需要在application 目录下添加database.php数据配置文件，并导入数据库 兼容IE9以上
 
 ### 演示地址
 
